@@ -17,6 +17,7 @@ class CreatePreguntasTable extends Migration
             $table->increments('id');
             $table->integer('evaluacione_id')->unsigned();
             $table->string('descripcion');
+            $table->text('apoyo');
             $table->string('opa');
             $table->string('opb');
             $table->string('opc');
