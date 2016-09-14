@@ -21,4 +21,13 @@ class Asignacione extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function competencias(){
+        return $this->hasMany('App\Competencia');
+    }
+
+    public function evaluciones(){
+        return $this->hasMany('App\Evaluacione');
+    }
+    
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePrecentacionesTable extends Migration
+class CreatePreguntaPresentacioneTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreatePrecentacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('precentaciones', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('evaluacione_id')->unsigned();
+        Schema::create('pregunta_presentacione', function (Blueprint $table) {
+           $table->integer('preguntas_id')->unsigned();
+            $table->integer('presentacione_id')->unsigned();
+            $table->string('respuesta');
             $table->timestamps();
 
-            $table->foreign('user_id')
-                  ->references('id')->on('users')
+            $table->foreign('preguntas_id')
+                  ->references('id')->on('preguntas')
                   ->onUpdate('no action')
                   ->onDelete('restrict');
-            
-            $table->foreign('evaluacione_id')
-                  ->references('id')->on('evaluaciones')
+
+            $table->foreign('presentacione_id')
+                  ->references('id')->on('presentaciones')
                   ->onUpdate('no action')
                   ->onDelete('restrict');
         });
@@ -38,6 +38,6 @@ class CreatePrecentacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('precentaciones');
+        Schema::dropIfExists('pregunta_presentacione');
     }
 }

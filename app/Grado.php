@@ -14,4 +14,8 @@ class Grado extends Model
     public function asignaciones(){
         return $this->hasMany('App\Asignacione');
     }
+
+    public function users(){
+        return $this->belongsToMany('App\User');
+    }
 }
