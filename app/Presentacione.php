@@ -11,7 +11,7 @@ class Presentacione extends Model
     protected $fillable = ['user_id', 'evaluacione_id'];
 
     public function user(){
-        return this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function evaluacione(){
