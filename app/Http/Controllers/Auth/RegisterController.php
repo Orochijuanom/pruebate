@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -50,7 +50,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'role_id' => 'required'
         ]);
     }
 
@@ -65,7 +65,8 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'role_id' => $data['role_id'],
+            'password' => bcrypt('123456'),
         ]);
     }
 }

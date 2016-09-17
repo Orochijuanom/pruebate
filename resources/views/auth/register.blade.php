@@ -38,29 +38,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                        <div class="form-group{{ $errors->has('rol_id') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Rol</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <select class="form-control" name="role_id">
 
-                                @if ($errors->has('password'))
+                                    @foreach ($roles as $role)
+                                        @if (old('role_id') == $role->id)
+                                        
+                                            <option value="{{$role -> id}}" selected>{{$role->descripcion}}</option>
+                                        @else
+
+                                            <option value="{{$role -> id}}">{{$role->descripcion}}</option>
+
+                                        @endif
+                                    @endforeach
+
+                                </select>
+
+
+                                @if ($errors->has('rol_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                        <strong>{{ $errors->first('rol_id') }}</strong>
                                     </span>
                                 @endif
                             </div>
