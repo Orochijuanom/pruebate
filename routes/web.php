@@ -29,5 +29,5 @@ Route::group(['middleware' => 'auth'], function () {
         return view('docente.create_evaluacion');
     });
 
-    Route::post('/docente/registrar_evaluacion', DocenteController@registrar_evaluacion);
+    
 });
