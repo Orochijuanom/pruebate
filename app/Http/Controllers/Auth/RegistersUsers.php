@@ -31,9 +31,9 @@ trait RegistersUsers
     {
         $this->validator($request->all())->validate();
 
-        $this->guard()->login($this->create($request->all()));
+        $this->create($request->all());
 
-        return redirect($this->redirectPath());
+        return redirect('register') -> with('message', 'Usuario registrado');
     }
 
     /**
