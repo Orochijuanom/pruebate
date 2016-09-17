@@ -18,3 +18,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+/** RUTAS DOCENTE **/
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/docente/', function(){
+        return view('docente.index');
+    });
+
+    Route::get('/docente/create_evaluacion', function(){
+        return view('docente.create_evaluacion');
+    });
+
+    Route::post('/docente/registrar_evaluacion', DocenteController@registrar_evaluacion);
+});
