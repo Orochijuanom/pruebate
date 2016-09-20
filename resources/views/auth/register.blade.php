@@ -44,7 +44,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('rol_id') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Rol</label>
 
                             <div class="col-md-6">
@@ -64,9 +64,9 @@
                                 </select>
 
 
-                                @if ($errors->has('rol_id'))
+                                @if ($errors->has('role_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('rol_id') }}</strong>
+                                        <strong>{{ $errors->first('role_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

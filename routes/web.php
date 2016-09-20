@@ -46,10 +46,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('administrador/docentes/{id}', function($id) {
         $docente = App\User::find($id);
-        return view('administrador.docentes_show')->with('docente', $docente);
+        return view('administrador.docentes_edit')->with('docente', $docente);
     });
 
-    Route::put('administrador/docentes/{id}', 'AdministradorController@editDocente');
+    Route::put('administrador/docentes/{id}', 'AdministradorController@updateDocente');
 
     Route::get('administrador/grados', function() {
         $grados = App\Grado::all();
@@ -62,5 +62,27 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('administrador/grados', 'AdministradorController@storeGrado');
 
+    Route::get('administrador/grados/{id}', function($id) {
+        $grado = App\Grado::find($id);
+        return view('administrador.grados_edit')->withGrado($grado);
+    });
+
+    Route::put('administrador/grados/{id}', 'AdministradorController@updateGrado');
+
+    Route::get('administrador/asignaciones/', function() {
+        $asignaciones = App\Asignacione::with('user')->with('grado')->get();
+        return view('administrador.asignaciones')->withAsignaciones($asignaciones);
+        
+    });
+
+    Route::get('administrador/asignaciones/create', function() {
+        $users = App\User::where('role_id', '=', '2')->get();
+        $materias = App\Materia::all();
+        $grados = App\Grado::all();
+        
+        return view('administrador.asignaciones_create')->with(['users' => $users, 'grados' => $grados, 'materias' => $materias]);
+    });
+
+    Route::post('administrador/asignaciones','AdministradorController@storeAsignacione');
     
 });

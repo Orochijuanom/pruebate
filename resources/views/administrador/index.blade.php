@@ -29,6 +29,19 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="{{asset('img/asignaciones.png')}}" alt="..."/>
+                    <div class="caption">
+                        <h3>Asignacion Academica</h3>
+                        <p>Administra la asignación academica</p>
+                        <p>
+                            <a href="/administrador/asignaciones" class="btn btn-primary" role="button">Entrar</a> 
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>    
 </div>
