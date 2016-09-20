@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('/docente/create_evaluacion', function(){
+        $grados = App\Asignacione::getMisGrados();
         return view('docente.create_evaluacion');
     });
 
