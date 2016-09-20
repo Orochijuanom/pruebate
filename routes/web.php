@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+//Route::get('/home', 'HomeController@index');
 
 /** RUTAS DOCENTE **/
 Route::group(['middleware' => 'auth'], function () {
@@ -29,6 +29,38 @@ Route::group(['middleware' => 'auth'], function () {
         $grados = App\Asignacione::getMisGrados();
         return view('docente.create_evaluacion');
     });
+
+    
+});
+/** RUTAS ADMINISTRADOR **/
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/administrador/', function(){
+        return view('administrador.index');
+    });
+
+    Route::get('/administrador/docentes/', function() {
+        //
+        $docentes = App\User::where('role_id', '=', '2')->paginate(10);
+        return view('administrador.docentes')->with('docentes', $docentes);
+    });
+
+    Route::get('administrador/docentes/{id}', function($id) {
+        $docente = App\User::find($id);
+        return view('administrador.docentes_show')->with('docente', $docente);
+    });
+
+    Route::put('administrador/docentes/{id}', 'AdministradorController@editDocente');
+
+    Route::get('administrador/grados', function() {
+        $grados = App\Grado::all();
+        return view('administrador.grados')->with('grados', $grados);
+    });
+    
+    Route::get('administrador/grados/create', function() {
+        return view('administrador.grados_create');
+    });
+
+    Route::post('administrador/grados', 'AdministradorController@storeGrado');
 
     
 });
