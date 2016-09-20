@@ -14,9 +14,10 @@ trait RedirectsUsers
     public function redirectPath()
     {   
         if(Auth::check()){
+           
             switch (Auth::user()->role_id) {
                 case '1':
-                    return property_exists($this, 'redirectTo') ? $this->redirectTo : '/admin';
+                    return property_exists($this, 'redirectTo') ? $this->redirectTo : '/administrador';
                     break;
                 
                 case '2':
@@ -28,6 +29,6 @@ trait RedirectsUsers
                     break;
             }
         }
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
     }
 }

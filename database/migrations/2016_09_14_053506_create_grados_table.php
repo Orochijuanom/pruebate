@@ -15,7 +15,7 @@ class CreateGradosTable extends Migration
     {
         Schema::create('grados', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('grados');
+            $table->string('descripcion');
             $table->timestamps();
      
         });
