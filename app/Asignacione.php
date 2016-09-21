@@ -29,10 +29,5 @@ class Asignacione extends Model
     public function evaluciones(){
         return $this->hasMany('App\Evaluacione');
     }
-
-    public function getMisGrados()
-    {
-        
-    }
     
 }
