@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
                     ->with('evaluaciones',$evaluaciones);
     });
 
-<<<<<<< HEAD
+
     Route::get('/docente/crear_evaluacion/{id}', function($id){
         return view('docente.crear_evaluacion')
                 ->with('id', $id);
@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/docente/crear_evaluacion/', crear_evaluacion@DocenteController);
 
 });
-=======
+
     
 });
 /** RUTAS ADMINISTRADOR **/
@@ -101,4 +101,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('administrador/asignaciones','AdministradorController@storeAsignacione');
     
 });
->>>>>>> origin/master
+
