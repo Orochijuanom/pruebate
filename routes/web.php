@@ -41,10 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ->with('id', $id);
     });
 
-    Route::post('/docente/crear_evaluacion/', crear_evaluacion@DocenteController);
-
-});
-
+    Route::post('/docente/crear_evaluacion/', 'DocenteController@crear_evaluacion');
     
 });
 /** RUTAS ADMINISTRADOR **/
