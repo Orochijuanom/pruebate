@@ -1,41 +1,38 @@
 @extends('layouts.docente')
 @section('content')
+    <ol class="breadcrumb">
+      <li><a href="/docente/">Inicio</a></li>
+      <li class="active">Evaluaciones</li>      
+    </ol>
     <div class="panel panel-default">
         <div class="panel-heading">Panel de gestión</div>
             <div class="panel-body">     
-                @if (Session::get('flash_message'))
-                    <div class="alert alert-success">
-                        {{Session::get('flash_message')}}
-                        <br><br>            
-                    </div>
-                @endif
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/docente/crear_evaluacion') }}">
-                    {{ csrf_field() }}
+                @if(count($evaluaciones)>0)
+                    <div class="alert alert-success" role="alert">Las evaluaciones creadas</div>
+                    <table class="table table-bordered">  
+                        <thead>
+                            <th>N.</th>
+                            <th>Grado</th>
+                            <th>Materia</th>
+                            <th>Opciones</th>
+                        </thead>  
+                        <tbody>
+                            @foreach($evaluaciones as $evaluacion)
+                                <tr>
+                                    <td scope="row">1</td>
+                                    <td>{{$evaluacion->intentos}}</td>
+                                    <td>{{$evaluacion->created_at}}</td>
+                                    <td><a href="/docente/evaluacion/definicion/{{$grado->id}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></td>
+                                </tr>    
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="alert alert-warning" role="alert">No se encontraron evaluaciones creadas</div>
+                @endif        
 
-                    <div class="form-group">
-                        <label for="intentos" class="col-md-4 control-label">Intentos</label>
-                        <div class="col-md-6">
-                            <input id="intentos" type="text" class="form-control" name="intentos" required autofocus>                            
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fecha_presentacion" class="col-md-4 control-label">Fecha presentación</label>
-                        <div class="col-md-6">
-                            <input id="fecha_presentacion" type="date" class="form-control" name="created_at" required>                            
-                        </div>
-                    </div>
-                    <input type="hidden" name="asignacione_id" value="{{$grado->id}}" />
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
-                                Crear Evaluación
-                            </button>
-                        </div>
-                    </div>
-                </form> 
+                <a href="/docente/crear_evaluacion/{{$grado->id}}">Crear evaluaciones</a>
              </div>
         </div>
     </div>    
-   
 @endsection

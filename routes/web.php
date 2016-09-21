@@ -45,10 +45,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/docente/evaluacion/definicion/{id}', function($id){
         $preguntas = App\Pregunta::where('evaluacione_id','=',$id)->get();
         return view('docente.definicion')
+                        ->with('id', $id)
                         ->with('preguntas',$preguntas);
     });
 
     Route::post('/docente/crear_evaluacion/', 'DocenteController@crear_evaluacion');
+    Route::post('/docente/definicion/', 'DocenteController@crear_pregunta');
     
 });
 /** RUTAS ADMINISTRADOR **/

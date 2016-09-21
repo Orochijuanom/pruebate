@@ -1,5 +1,10 @@
 @extends('layouts.docente')
 @section('content')
+       <ol class="breadcrumb">
+      <li><a href="/docente/">Inicio</a></li>
+      <li><a href="/docente/evaluacion/">Evaluaciones</a></li>
+      <li class="active">Crear Evaluación</li>
+    </ol>
     <div class="panel panel-default">
         <div class="panel-heading">Panel de gestión</div>
             <div class="panel-body">     
@@ -13,9 +18,16 @@
                     {{ csrf_field() }}
 
                     <div class="form-group">
+                        <label for="descripcion" class="col-md-4 control-label">Descripción</label>
+                        <div class="col-md-6">
+                            <input id="descripcion" type="text" class="form-control" name="descripcion" required autofocus>                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="intentos" class="col-md-4 control-label">Intentos</label>
                         <div class="col-md-6">
-                            <input id="intentos" type="text" class="form-control" name="intentos" required autofocus>                            
+                            <input id="intentos" type="text" class="form-control" name="intentos" required>                            
                         </div>
                     </div>
 

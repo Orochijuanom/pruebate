@@ -1,5 +1,9 @@
 @extends('layouts.docente')
 @section('content')
+<ol class="breadcrumb">
+  <li><a href="#">Inicio</a></li>
+</ol>
+
 <div class="panel panel-default">
   <div class="panel-heading">Panel de gestión docnete</div>
   <div class="panel-body">
@@ -16,7 +20,7 @@
                 @foreach($grados as $grado)
                     <tr>
                         <td scope="row">1</td>
-                        <td>{{$grado->grado->grados}}</td>
+                        <td>{{$grado->grado->descripcion}}</td>
                         <td>{{$grado->materia->descripcion}}</td>
                         <td><a href="/docente/evaluacion/{{$grado->id}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></td>
                     </tr>    
