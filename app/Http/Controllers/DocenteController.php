@@ -5,31 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Evaluacione;
 
 class DocenteController extends Controller
 {
     
-    
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function crear_evaluacion(Request $request)
-    {
+    public function crear_evaluacion(Request $request){
         $this->validate($request, [
-            'id' => 'required',
+            'asignacione_id' => 'required',
             'intentos' => 'required',
-            'fecha_presentacion' => 'required'
+            'created_at' => 'required'
         ]);
 
-        $input = $request->all();
-        app\Evaluacione::create($input);
-        Session::flash('flash_message', 'Task successfully added!');
-        //return redirect()->back();
+        $input = $request->all();        
+        Evaluacione::create($input);        
+        return redirect()->back()->with('flash_message', 'Se ha creado la evaluación exitosamente');    
     }
-
-
+    
 }

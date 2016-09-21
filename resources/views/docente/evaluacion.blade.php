@@ -1,34 +1,41 @@
 @extends('layouts.docente')
 @section('content')
     <div class="panel panel-default">
-        <div class="panel-heading">Panel de gestión [ {{$grado->grado->grados}} - {{$grado->materia->descripcion}} ]</div>
-            <div class="panel-body">                
-                @if(count($evaluaciones)>0)
-                    <div class="alert alert-success" role="alert">Los cursos asignados</div>
-                    <table class="table table-bordered">  
-                        <thead>
-                            <th>N.</th>
-                            <th>Grado</th>
-                            <th>Materia</th>
-                            <th>Opciones</th>
-                        </thead>  
-                        <tbody>
-                            @foreach($evaluaciones as $evaluacion)
-                                <tr>
-                                    <td scope="row">1</td>
-                                    <td>{{$evaluacion->grado->grados}}</td>
-                                    <td>{{$evaluacion->materia->descripcion}}</td>
-                                    <td><a href="/docente/evaluacion/definicion/{{$evaluacion->id}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></td>
-                                </tr>    
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <div class="alert alert-warning" role="alert">No se encontraron asignaciones para usted</div>
+        <div class="panel-heading">Panel de gestión</div>
+            <div class="panel-body">     
+                @if (Session::get('flash_message'))
+                    <div class="alert alert-success">
+                        {{Session::get('flash_message')}}
+                        <br><br>            
+                    </div>
                 @endif
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/docente/crear_evaluacion') }}">
+                    {{ csrf_field() }}
 
-                <a href="/docente/crear_evaluacion/{{$grado->id}}" class="btn btn-default"><i class="fa fa-btn fa-plus"></i>Crear Evaluación</a>
-            </div>
+                    <div class="form-group">
+                        <label for="intentos" class="col-md-4 control-label">Intentos</label>
+                        <div class="col-md-6">
+                            <input id="intentos" type="text" class="form-control" name="intentos" required autofocus>                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha_presentacion" class="col-md-4 control-label">Fecha presentación</label>
+                        <div class="col-md-6">
+                            <input id="fecha_presentacion" type="date" class="form-control" name="created_at" required>                            
+                        </div>
+                    </div>
+                    <input type="hidden" name="asignacione_id" value="{{$grado->id}}" />
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary">
+                                Crear Evaluación
+                            </button>
+                        </div>
+                    </div>
+                </form> 
+             </div>
         </div>
     </div>    
+   
 @endsection

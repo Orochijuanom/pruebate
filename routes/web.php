@@ -30,15 +30,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/docente/evaluacion/{id}', function($id){
         $grado = App\Asignacione::find($id)->first();
         $evaluaciones = App\Evaluacione::where('asignacione_id','=',$id)->get();
-        return view('docente.evaluacion')
+        return view('docente.evaluacion')                    
                     ->with('grado',$grado)
                     ->with('evaluaciones',$evaluaciones);
     });
 
 
     Route::get('/docente/crear_evaluacion/{id}', function($id){
+                
         return view('docente.crear_evaluacion')
                 ->with('id', $id);
+    });
+
+    Route::get('/docente/evaluacion/definicion/{id}', function($id){
+        $preguntas = App\Pregunta::where('evaluacione_id','=',$id)->get();
+        return view('docente.definicion')
+                        ->with('preguntas',$preguntas);
     });
 
     Route::post('/docente/crear_evaluacion/', 'DocenteController@crear_evaluacion');
