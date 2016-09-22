@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -77,6 +77,7 @@
         @yield('content')
     </div>
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="/js/app.js"></script>    	
+    <script src="{{ asset('/vendors/ckeditor/ckeditor.js') }}"></script>
 </body>
 </html>

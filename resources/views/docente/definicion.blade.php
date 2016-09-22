@@ -21,11 +21,10 @@
                     <div class="form-group">
                         <label for="descripcion" class="col-md-4 control-label">Descripción</label>
                         <div class="col-md-6">
-                            <textarea id="descripcion" class="form-control" name="descripcion" required autofocus></textarea>                            
+                            <textarea id="descripcion" class="form-control ckeditor" name="descripcion" required autofocus></textarea>                            
                         </div>
                     </div>
-                    <hr/>
-
+                    <hr/>                    
                     <div class="form-group">
                         <label for="opa" class="col-md-4 control-label">Opción A</label>
                         <div class="col-md-6">

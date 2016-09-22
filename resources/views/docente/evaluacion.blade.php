@@ -12,17 +12,23 @@
                     <table class="table table-bordered">  
                         <thead>
                             <th>N.</th>
-                            <th>Grado</th>
-                            <th>Materia</th>
+                            <th>Descripción</th>
+                            <th>Intentos</th>
+                            <th>F. Presentación</th>
                             <th>Opciones</th>
                         </thead>  
                         <tbody>
                             @foreach($evaluaciones as $evaluacion)
                                 <tr>
                                     <td scope="row">1</td>
+                                    <td>{{$evaluacion->descripcion}}</td>
                                     <td>{{$evaluacion->intentos}}</td>
                                     <td>{{$evaluacion->created_at}}</td>
-                                    <td><a href="/docente/evaluacion/definicion/{{$grado->id}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></td>
+                                    <td>
+                                        <a href="/docente/evaluacion/definicion/{{$grado->id}}"><i class="fa fa-cogs" aria-hidden="true"></i></a>
+                                        <a href="/docente/evaluacion/{{$grado->id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    </td>
+                                    
                                 </tr>    
                             @endforeach
                         </tbody>
@@ -30,8 +36,8 @@
                 @else
                     <div class="alert alert-warning" role="alert">No se encontraron evaluaciones creadas</div>
                 @endif        
-
-                <a href="/docente/crear_evaluacion/{{$grado->id}}">Crear evaluaciones</a>
+                
+                <a href="/docente/crear_evaluacion/{{$grado->id}}" class="btn btn-default">Crear evaluaciones</a>
              </div>
         </div>
     </div>    

@@ -21,9 +21,14 @@ Auth::routes();
 
 /** RUTAS DOCENTE **/
 Route::group(['middleware' => 'auth'], function () {
+
     Route::get('/docente/', function(){
+        return view('docente.index');
+    });
+
+    Route::get('/docente/index_evaluacion/', function(){
         $grados = App\Asignacione::where('user_id', '=', Auth::user()->id)->get();        
-        return view('docente.index')
+        return view('docente.index_evaluacion')
                     ->with('grados', $grados);
     });
 
@@ -35,6 +40,11 @@ Route::group(['middleware' => 'auth'], function () {
                     ->with('evaluaciones',$evaluaciones);
     });
 
+    Route::get('/docente/estandares/', function(){
+        $grados = App\Asignacione::where('user_id', '=', Auth::user()->id)->get();        
+        return view('docente.estandares')
+                    ->with('grados', $grados);
+    });
 
     Route::get('/docente/crear_evaluacion/{id}', function($id){
                 

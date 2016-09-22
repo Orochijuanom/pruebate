@@ -38,6 +38,31 @@
                         </div>
                     </div>
                     <input type="hidden" name="asignacione_id" value="{{$id}}" />
+
+                    <hr>
+                    <h3>Estándares</h3>
+
+                    <div class="form-group">
+                        <label for="fecha_presentacion" class="col-md-4 control-label">Estandar 1</label>
+                        <div class="col-md-6">
+                            <input id="fecha_presentacion" type="date" class="form-control" name="created_at" required>                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha_presentacion" class="col-md-4 control-label">Estandar 2</label>
+                        <div class="col-md-6">
+                            <input id="fecha_presentacion" type="date" class="form-control" name="created_at" required>                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha_presentacion" class="col-md-4 control-label">Fecha presentación</label>
+                        <div class="col-md-6">
+                            <input id="fecha_presentacion" type="date" class="form-control" name="created_at" required>                            
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
