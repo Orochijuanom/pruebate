@@ -26,7 +26,7 @@ class Asignacione extends Model
         return $this->hasMany('App\Competencia');
     }
 
-    public function evaluciones(){
+    public function evaluaciones(){
         return $this->hasMany('App\Evaluacione');
     }
     

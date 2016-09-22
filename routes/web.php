@@ -105,6 +105,17 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::post('administrador/asignaciones','AdministradorController@storeAsignacione');
-    
+
+});
+/** RUTAS ADMINISTRADOR **/
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/estudiante/', function() {
+        
+        $user_id = Auth::user()->id;
+        $grado = App\User::find($user_id)->grados()->where('grado_user.anio', '=', date('Y'))->first();
+        $materias = App\Grado::find($grado->id)->asignaciones()->with('materia')->with('evaluaciones')->get();
+
+        return view('estudiante.index')->withMaterias($materias);    
+    });
 });
 

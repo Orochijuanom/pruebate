@@ -42,4 +42,5 @@ class User extends Authenticatable
     public function grados(){
         return $this->belongsToMany('App\Grado');
     }
+
 }
