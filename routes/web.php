@@ -47,9 +47,10 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('/docente/crear_evaluacion/{id}', function($id){
-                
+        $estandares = App\Estandate::all();
         return view('docente.crear_evaluacion')
-                ->with('id', $id);
+                ->with('id', $id)
+                ->with('estandares', $estandares);
     });
 
     Route::get('/docente/evaluacion/definicion/{id}', function($id){
