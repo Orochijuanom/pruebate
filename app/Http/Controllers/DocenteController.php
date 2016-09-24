@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Evaluacione;
 use App\Pregunta;
+use App\Estandare;
+use App\Competencia;
 class DocenteController extends Controller
 {
     
@@ -38,6 +40,27 @@ class DocenteController extends Controller
         $data = $request->all();
         Pregunta::create($data);
         return redirect()->back()->with('flash_message', 'Se ha creado la pregunta exitosamente');    
+    }
+
+    public function crear_estandar(Request $request)
+    {
+        $this->validate($request, [
+            'descripcion' => 'required'
+        ]);
+        $data = $request->all();
+        Estandare::create($data);
+        return redirect()->back()->with('flash_message', 'Se ha creado el exitosamente');
+    }
+
+    public function definir_estandar(Request $request)
+    {
+        $this->validate($request, [
+            'descripcion' => 'required',
+            'estandare_id' => 'required'
+        ]);
+        $data = $request->all();
+        Competencia::create($data);
+        return redirect()->back()->with('flash_message', 'Se ha creado el exitosamente');
     }
     
 }

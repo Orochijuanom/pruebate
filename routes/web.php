@@ -39,11 +39,12 @@ Route::group(['middleware' => 'auth'], function () {
                     ->with('grado',$grado)
                     ->with('evaluaciones',$evaluaciones);
     });
-
-    Route::get('/docente/estandares/', function(){
-        $grados = App\Asignacione::where('user_id', '=', Auth::user()->id)->get();        
-        return view('docente.estandares')
-                    ->with('grados', $grados);
+    
+    Route::get('/docente/evaluacion/definicion/{id}', function($id){
+        $preguntas = App\Pregunta::where('evaluacione_id','=',$id)->get();
+        return view('docente.definicion')
+                        ->with('id', $id)
+                        ->with('preguntas',$preguntas);
     });
 
     Route::get('/docente/crear_evaluacion/{id}', function($id){
@@ -53,15 +54,26 @@ Route::group(['middleware' => 'auth'], function () {
                 ->with('estandares', $estandares);
     });
 
-    Route::get('/docente/evaluacion/definicion/{id}', function($id){
-        $preguntas = App\Pregunta::where('evaluacione_id','=',$id)->get();
-        return view('docente.definicion')
-                        ->with('id', $id)
-                        ->with('preguntas',$preguntas);
+    Route::get('/docente/estandares/', function(){
+        $estandares = App\Estandare::paginate(10);        
+        return view('docente.estandares')
+                    ->with('estandares', $estandares);
+    });
+
+    Route::get('/docente/crear_estandar', function(){
+        return view('docente.crear_estandar');
+    });
+
+    Route::get('/docente/estandares/definicion/{id}', function($id){
+        $estandar = App\Estandare::find($id)->first();
+        return view('docente.competencias')
+            ->with('estandar', $estandar);
     });
 
     Route::post('/docente/crear_evaluacion/', 'DocenteController@crear_evaluacion');
     Route::post('/docente/definicion/', 'DocenteController@crear_pregunta');
+    Route::post('/docente/crear_estandar/', 'DocenteController@crear_estandar');
+    Route::post('/docente/estandares/definicion/', 'DocenteController@definir_estandar');
     
 });
 /** RUTAS ADMINISTRADOR **/
