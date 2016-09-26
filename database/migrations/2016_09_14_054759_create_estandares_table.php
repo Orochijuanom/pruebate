@@ -16,7 +16,13 @@ class CreateEstandaresTable extends Migration
         Schema::create('estandares', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descripcion');
+            $table->integer('asignacione_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('asignacione_id')
+                  ->references('id')->on('asignaciones')
+                  ->onUpdate('no action')
+                  ->onDelete('restrict');
         });
     }
 

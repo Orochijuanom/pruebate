@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('/docente/crear_evaluacion/{id}', function($id){
-        $estandares = App\Estandate::all();
+        $estandares = App\Estandare::all();
         return view('docente.crear_evaluacion')
                 ->with('id', $id)
                 ->with('estandares', $estandares);
@@ -136,9 +136,16 @@ Route::group(['middleware' => 'auth'], function () {
         
         $user_id = Auth::user()->id;
         $grado = App\User::find($user_id)->grados()->where('grado_user.anio', '=', date('Y'))->first();
-        $materias = App\Grado::find($grado->id)->asignaciones()->with('materia')->with('evaluaciones')->get();
+        $asignaciones = App\Grado::find($grado->id)->asignaciones()->with('materia')->with('evaluaciones')->get();
 
-        return view('estudiante.index')->withMaterias($materias);    
+        return view('estudiante.index')->withAsignaciones($asignaciones);    
+    });
+
+    Route::get('estudiante/{grado}/{materia}/{id}', function($grado, $materia, $id) {
+        $evaluacione  = App\Evaluacione::find($id)->with('asignacione')->first();
+        $preguntas = App\Evaluacione::find($id)->preguntas()->paginate(10);
+        
+        return view('estudiante.evaluacion')->withEvaluacione($evaluacione)->withPreguntas($preguntas);
     });
 });
 

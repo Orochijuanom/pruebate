@@ -24,14 +24,14 @@
                             </div>
                     @endif
 
-                    @if (count($materias) > 0)
-                        @foreach($materias as $materia)
+                    @if (count($asignaciones) > 0)
+                        @foreach($asignaciones as $asignacione)
                             <ul>
-                                <li>{{$materia->materia->descripcion}}
+                                <li>{{$asignacione->materia->descripcion}}
                                     <ul>
-                                        @if(count($materia->evaluaciones) > 0)
-                                            @foreach($materia->evaluaciones as $evaluacione)
-                                                <li>{{$evaluacione->descripcion}}
+                                        @if(count($asignacione->evaluaciones) > 0)
+                                            @foreach($asignacione->evaluaciones as $evaluacione)
+                                                <li><a href="/estudiante/{{$asignacione->grado->descripcion}}/{{$asignacione->materia->descripcion}}/{{$evaluacione->id}}"><i class="fa fa-check-square-o"></i> {{$evaluacione->descripcion}}</a>
                                             @endforeach
                                         @endif
                                     </ul>

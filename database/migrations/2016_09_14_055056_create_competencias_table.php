@@ -17,7 +17,6 @@ class CreateCompetenciasTable extends Migration
             $table->increments('id');
             $table->string('descripcion');
             $table->integer('estandare_id')->unsigned();
-            $table->integer('asignacione_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('estandare_id')
@@ -25,10 +24,7 @@ class CreateCompetenciasTable extends Migration
                   ->onUpdate('no action')
                   ->onDelete('restrict');
 
-            $table->foreign('asignacione_id')
-                  ->references('id')->on('asignaciones')
-                  ->onUpdate('no action')
-                  ->onDelete('restrict');
+            
 
         });
     }
