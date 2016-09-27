@@ -17,6 +17,7 @@ class CreatePresentacionesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('evaluacione_id')->unsigned();
+            $table->boolean('estado')->default('0');
             $table->timestamps();
 
             $table->foreign('user_id')

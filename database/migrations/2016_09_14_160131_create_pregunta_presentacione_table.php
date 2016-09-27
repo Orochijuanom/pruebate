@@ -14,12 +14,13 @@ class CreatePreguntaPresentacioneTable extends Migration
     public function up()
     {
         Schema::create('pregunta_presentacione', function (Blueprint $table) {
-           $table->integer('preguntas_id')->unsigned();
+            $table->increments('id');
+            $table->integer('pregunta_id')->unsigned();
             $table->integer('presentacione_id')->unsigned();
             $table->string('respuesta');
             $table->timestamps();
 
-            $table->foreign('preguntas_id')
+            $table->foreign('pregunta_id')
                   ->references('id')->on('preguntas')
                   ->onUpdate('no action')
                   ->onDelete('restrict');
@@ -28,6 +29,8 @@ class CreatePreguntaPresentacioneTable extends Migration
                   ->references('id')->on('presentaciones')
                   ->onUpdate('no action')
                   ->onDelete('restrict');
+
+            $table->unique(['pregunta_id', 'presentacione_id'], 'respuesta_unica_por_intento');
         });
     }
 

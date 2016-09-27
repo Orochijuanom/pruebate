@@ -31,7 +31,15 @@
                                     <ul>
                                         @if(count($asignacione->evaluaciones) > 0)
                                             @foreach($asignacione->evaluaciones as $evaluacione)
-                                                <li><a href="/estudiante/{{$asignacione->grado->descripcion}}/{{$asignacione->materia->descripcion}}/{{$evaluacione->id}}"><i class="fa fa-check-square-o"></i> {{$evaluacione->descripcion}}</a>
+                                                <li><a href="/estudiante/evaluacion/{{$evaluacione->id}}">
+                                                        <i class="fa fa-check-square-o"></i>                                                        
+                                                        {{$evaluacione->descripcion}}
+                                                        @if($evaluacione->limite < date('Y-m-d h:i:s'))
+                                                            - Caducada {{$evaluacione->limite}}
+                                                        @else
+                                                            - Vigente    
+                                                        @endif
+                                                    </a>
                                             @endforeach
                                         @endif
                                     </ul>

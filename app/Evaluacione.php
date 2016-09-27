@@ -8,7 +8,7 @@ class Evaluacione extends Model
 {
     protected $table = 'evaluaciones';
 
-    protected $fillable = ['descripcion', 'intentos', 'asignacione_id'];
+    protected $fillable = ['descripcion', 'intentos', 'limite', 'asignacione_id'];
 
     public function asignacione(){
         return $this->belongsTo('App\Asignacione');

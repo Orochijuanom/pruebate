@@ -141,11 +141,13 @@ Route::group(['middleware' => 'auth'], function () {
         return view('estudiante.index')->withAsignaciones($asignaciones);    
     });
 
-    Route::get('estudiante/{grado}/{materia}/{id}', function($grado, $materia, $id) {
+    Route::get('estudiante/evaluacion/{id}', function($id) {
         $evaluacione  = App\Evaluacione::find($id)->with('asignacione')->first();
-        $preguntas = App\Evaluacione::find($id)->preguntas()->paginate(10);
+        $preguntas = App\Evaluacione::find($id)->preguntas()->paginate(5);
         
         return view('estudiante.evaluacion')->withEvaluacione($evaluacione)->withPreguntas($preguntas);
     });
+
+    Route::post('estudiante/evaluacion/{id}/respuestas', 'EstudianteController@storeRespuesta');
 });
 

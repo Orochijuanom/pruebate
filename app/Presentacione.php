@@ -8,7 +8,7 @@ class Presentacione extends Model
 {
     protected $table = 'presentaciones';
 
-    protected $fillable = ['user_id', 'evaluacione_id'];
+    protected $fillable = ['user_id', 'evaluacione_id', 'estado'];
 
     public function user(){
         return $this->belongsTo('App\User');
@@ -19,6 +19,6 @@ class Presentacione extends Model
     }
 
     public function preguntas(){
-        return $this->belongsToMany('App\Pregunta');
+        return $this->belongsToMany('App\Pregunta')->withPivot('respuesta');
     }
 }
