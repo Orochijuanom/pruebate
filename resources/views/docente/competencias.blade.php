@@ -14,7 +14,7 @@
                         <br><br>            
                     </div>
                 @endif
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/docente/crear_competencia') }}">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/docente/estandares/definicion/') }}">
                     {{ csrf_field() }}
 
                     <div class="form-group">
@@ -35,7 +35,7 @@
 
                 <hr/>
                 @if(count($estandar->competencias)>0)
-                    <div class="alert alert-success" role="alert">Las evaluaciones creadas</div>
+                    <div class="alert alert-success" role="alert">Las Competencias asociadas</div>
                     <table class="table table-bordered">  
                         <thead>
                             <th>N.</th>
@@ -49,8 +49,7 @@
                                     <td scope="row">1</td>
                                     <td>{{$competencia->descripcion}}</td>                                    
                                     <td>{{$competencia->created_at}}</td>
-                                    <td>
-                                        <a href="/docente/estandares/definicion/{{$competencia->id}}"><i class="fa fa-cogs" aria-hidden="true"></i></a>
+                                    <td>                                        
                                         <a href="/docente/estandares/{{$competencia->id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     </td>
                                     

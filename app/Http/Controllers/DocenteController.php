@@ -9,6 +9,7 @@ use App\Evaluacione;
 use App\Pregunta;
 use App\Estandare;
 use App\Competencia;
+
 class DocenteController extends Controller
 {
     
@@ -18,12 +19,18 @@ class DocenteController extends Controller
             'descripcion' => 'required',
             'asignacione_id' => 'required',
             'intentos' => 'required',
-            'created_at' => 'required'
+            'limite' => 'required'
         ]);
 
         $data = $request->all();        
-        Evaluacione::create($data);        
-        return redirect()->back()->with('flash_message', 'Se ha creado la evaluación exitosamente');    
+        $evaluacion = Evaluacione::create($data);
+        foreach($request->competencia as $competencia){
+            if ($competencia >= 1) $evaluacion->competencias()->attach($competencia);
+        }
+        
+        return redirect()->back()->with('flash_message', 'Se ha creado la evaluación exitosamente');
+        
+            
     }
 
     public function crear_pregunta(Request $request){
@@ -61,6 +68,5 @@ class DocenteController extends Controller
         $data = $request->all();
         Competencia::create($data);
         return redirect()->back()->with('flash_message', 'Se ha creado el exitosamente');
-    }
-    
+    }  
 }

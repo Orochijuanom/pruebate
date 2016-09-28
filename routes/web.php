@@ -48,10 +48,10 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('/docente/crear_evaluacion/{id}', function($id){
-        $estandares = App\Estandare::all();
+        $competencias = App\Competencia::all();
         return view('docente.crear_evaluacion')
                 ->with('id', $id)
-                ->with('estandares', $estandares);
+                ->with('competencias', $competencias);
     });
 
     Route::get('/docente/estandares/', function(){
@@ -61,7 +61,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('/docente/crear_estandar', function(){
-        return view('docente.crear_estandar');
+        $asignaciones = App\Asignacione::where('user_id','=',Auth::user()->id)->get();
+        return view('docente.crear_estandar')
+                ->with('asignaciones',$asignaciones);
     });
 
     Route::get('/docente/estandares/definicion/{id}', function($id){
@@ -74,6 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/docente/definicion/', 'DocenteController@crear_pregunta');
     Route::post('/docente/crear_estandar/', 'DocenteController@crear_estandar');
     Route::post('/docente/estandares/definicion/', 'DocenteController@definir_estandar');
+    
     
 });
 /** RUTAS ADMINISTRADOR **/

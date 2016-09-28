@@ -7,7 +7,19 @@
     </ol>
     <div class="panel panel-default">
         <div class="panel-heading">Panel de gestión</div>
-            <div class="panel-body">     
+            <div class="panel-body">
+            
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> Hubo Algunos problemas con tu entrada.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 @if (Session::get('flash_message'))
                     <div class="alert alert-success">
                         {{Session::get('flash_message')}}
@@ -16,7 +28,6 @@
                 @endif
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/docente/crear_evaluacion') }}">
                     {{ csrf_field() }}
-
                     <div class="form-group">
                         <label for="descripcion" class="col-md-4 control-label">Descripción</label>
                         <div class="col-md-6">
@@ -34,35 +45,54 @@
                     <div class="form-group">
                         <label for="fecha_presentacion" class="col-md-4 control-label">Fecha presentación</label>
                         <div class="col-md-6">
-                            <input id="fecha_presentacion" type="date" class="form-control" name="created_at" required>                            
-                        </div>
-                    </div>
-                    <input type="hidden" name="asignacione_id" value="{{$id}}" />
-
-                    <hr>
-                    <h3>Estándares</h3>
-
-                    <div class="form-group">
-                        <label for="fecha_presentacion" class="col-md-4 control-label">Estandar 1</label>
-                        <div class="col-md-6">
-                            <input id="fecha_presentacion" type="date" class="form-control" name="created_at" required>                            
+                            <input id="fecha_presentacion" type="date" class="form-control" name="limite" required>                            
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="fecha_presentacion" class="col-md-4 control-label">Estandar 2</label>
+                        <label for="apoyo" class="col-md-4 control-label">Url recurso apoyo</label>
                         <div class="col-md-6">
-                            <input id="fecha_presentacion" type="date" class="form-control" name="created_at" required>                            
+                            <input id="apoyo" type="text" class="form-control" name="apoyo" required>                            
+                        </div>
+                    </div>
+                    <hr/>
+                    
+                    <div class="form-group">
+                        <label for="apoyo" class="col-md-4 control-label">Competencias 1</label>
+                        <div class="col-md-6">
+                            <select class="form-control" name="competencia[]">
+                                <option value="-1">--SELECCIONE--</option>
+                                @foreach($competencias as $competencia)
+                                    <option value="{{$competencia->id}}">{{$competencia->descripcion}}</option>
+                                @endforeach
+                            </select>                            
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="fecha_presentacion" class="col-md-4 control-label">Fecha presentación</label>
+                        <label for="apoyo" class="col-md-4 control-label">Competencia 2</label>
                         <div class="col-md-6">
-                            <input id="fecha_presentacion" type="date" class="form-control" name="created_at" required>                            
+                            <select class="form-control" name="competencia[]">
+                                <option value="-1">--SELECCIONE--</option>
+                                @foreach($competencias as $competencia)
+                                    <option value="{{$competencia->id}}">{{$competencia->descripcion}}</option>
+                                @endforeach
+                            </select>                            
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label for="apoyo" class="col-md-4 control-label">Competencia 3</label>
+                        <div class="col-md-6">
+                            <select class="form-control" name="competencia[]">
+                                <option value="-1">--SELECCIONE--</option>
+                                @foreach($competencias as $competencia)
+                                    <option value="{{$competencia->id}}">{{$competencia->descripcion}}</option>
+                                @endforeach
+                            </select>                            
+                        </div>
+                    </div>
+                    <input type="hidden" name="asignacione_id" value="{{$id}}" />                    
+                    
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">

@@ -22,7 +22,18 @@
                         <div class="col-md-6">
                             <input id="descripcion" type="text" class="form-control" name="descripcion" required autofocus>                            
                         </div>
-                    </div>                
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion" class="col-md-4 control-label">Grado</label>
+                        <div class="col-md-6">
+                            <select id="asignacione" class="form-control" name="asignacione_id">
+                                @foreach ($asignaciones as $asignacione)
+                                    <option value="{{$asignacione->id}}">{{$asignacione->materia->descripcion}}</option>
+                                @endforeach
+                            </select>                                                        
+                        </div>
+                    </div>
+                                    
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
