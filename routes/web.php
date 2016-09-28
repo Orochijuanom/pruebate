@@ -20,7 +20,7 @@ Auth::routes();
 //Route::get('/home', 'HomeController@index');
 
 /** RUTAS DOCENTE **/
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
 
     Route::get('/docente/', function(){
         return view('docente.index');
@@ -133,8 +133,8 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
     Route::post('administrador/asignaciones','AdministradorController@storeAsignacione');
 
 });
-/** RUTAS ADMINISTRADOR **/
-Route::group(['middleware' => 'auth'], function () {
+/** RUTAS ESTUDIANTE **/
+Route::group(['middleware' => 'auth','middleware' => 'estudiante'], function () {
     Route::get('/estudiante/', function() {
         
         $user_id = Auth::user()->id;
@@ -145,10 +145,21 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('estudiante/evaluacion/{id}', function($id) {
+        $limite = 0;
+        $intentos = 0;
+        $presentacione = null;
         $evaluacione  = App\Evaluacione::find($id)->with('asignacione')->first();
         $preguntas = App\Evaluacione::find($id)->preguntas()->paginate(5);
         
-        return view('estudiante.evaluacion')->withEvaluacione($evaluacione)->withPreguntas($preguntas);
+        $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '0')->orderBy('created_at', 'desc')->with('preguntas')->first();
+        
+        if(!$presentacione){
+           $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '1')->orderBy('created_at', 'desc')->with('preguntas')->first();
+           
+        }
+        
+
+        return view('estudiante.evaluacion')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione);
     });
 
     Route::post('estudiante/evaluacion/{id}/respuestas', 'EstudianteController@storeRespuesta');

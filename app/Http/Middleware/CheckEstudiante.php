@@ -4,6 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 
+use Auth;
+use Response;
+
 class CheckEstudiante
 {
     /**
@@ -15,6 +18,14 @@ class CheckEstudiante
      */
     public function handle($request, Closure $next)
     {
+        if (Auth::check()) {
+            if (Auth::user()->role_id != 3) {
+                return response::view('errors/401',array() ,401);
+            }
+        }else{
+            return redirect()->guest('login');
+        }
+
         return $next($request);
     }
 }

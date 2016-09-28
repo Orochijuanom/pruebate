@@ -14,6 +14,7 @@ class CreateCompetenciaEvaluacioneTable extends Migration
     public function up()
     {
         Schema::create('competencia_evaluacione', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('competencia_id')->unsigned();
             $table->integer('evaluacione_id')->unsigned();
 

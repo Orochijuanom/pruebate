@@ -17,6 +17,7 @@ class CreateEvaluacionesTable extends Migration
             $table->increments('id');
             $table->string("descripcion");
             $table->integer('intentos');
+            $table->text('apoyo');
             $table->integer('asignacione_id')->unsigned();
             $table->timestamp('limite');            
             $table->timestamps();

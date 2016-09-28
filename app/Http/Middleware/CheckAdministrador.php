@@ -20,7 +20,7 @@ class CheckAdministrador
     {   
 
         if (Auth::check()) {
-            if (Auth::user()->rol_id != 1) {
+            if (Auth::user()->role_id != 1) {
                 return response::view('errors/401',array() ,401);
             }
         }else{

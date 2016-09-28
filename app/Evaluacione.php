@@ -8,7 +8,7 @@ class Evaluacione extends Model
 {
     protected $table = 'evaluaciones';
 
-    protected $fillable = ['descripcion', 'intentos', 'limite', 'asignacione_id'];
+    protected $fillable = ['descripcion', 'intentos', 'apoyo', 'limite', 'asignacione_id'];
 
     public function asignacione(){
         return $this->belongsTo('App\Asignacione');
@@ -18,7 +18,7 @@ class Evaluacione extends Model
         return $this->hasMany('App\Pregunta');
     }
 
-    public function precentaciones(){
+    public function presentaciones(){
         return $this->hasMany('App\Presentacione');
     }
 

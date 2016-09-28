@@ -43,7 +43,14 @@
                                 <div class="col-md-12">
                                     <div class="input-group">
                                     <span class="input-group-addon">
-                                        A ) <input type="radio" name="{{$pregunta->id}}" value="A" required>
+                                        A ) <input type="radio" name="{{$pregunta->id}}" value="A" required 
+                                        @if($presentacione != null) 
+                                            @foreach($presentacione->preguntas as $respuesta)
+                                                @if($respuesta->pivot->pregunta_id == $pregunta->id && $respuesta->pivot->respuesta == 'A' )
+                                                    checked
+                                                @endif
+                                            @endforeach
+                                        @endif>
                                     </span>
                                     <label id="opa" class="form-control" name="opa" >{{$pregunta->opa}}</label>                            
                                     </div><!-- /input-group -->                               
@@ -54,7 +61,14 @@
                             <div class="col-md-12">
                                 <div class="input-group">
                                 <span class="input-group-addon">
-                                    B ) <input type="radio" name="{{$pregunta->id}}" value="B">
+                                    B ) <input type="radio" name="{{$pregunta->id}}" value="B"
+                                    @if($presentacione != null) 
+                                            @foreach($presentacione->preguntas as $respuesta)
+                                                @if($respuesta->pivot->pregunta_id == $pregunta->id && $respuesta->pivot->respuesta == 'B' )
+                                                    checked
+                                                @endif
+                                            @endforeach
+                                    @endif>
                                 </span>
                                 <label id="opb" class="form-control" name="opb" >{{$pregunta->opb}}</label>                           
                                 </div><!-- /input-group -->                       
@@ -65,7 +79,14 @@
                             <div class="col-md-12">
                                 <div class="input-group">
                                 <span class="input-group-addon">
-                                   C ) <input type="radio" name="{{$pregunta->id}}" value="C">
+                                   C ) <input type="radio" name="{{$pregunta->id}}" value="C"
+                                   @if($presentacione != null) 
+                                            @foreach($presentacione->preguntas as $respuesta)
+                                                @if($respuesta->pivot->pregunta_id == $pregunta->id && $respuesta->pivot->respuesta == 'C' )
+                                                    checked
+                                                @endif
+                                            @endforeach
+                                    @endif>
                                 </span>
                                 <label id="opc" class="form-control" name="opc">{{$pregunta->opc}}</label>                            
                                 </div><!-- /input-group -->
@@ -76,7 +97,14 @@
                             <div class="col-md-12">
                                 <div class="input-group">
                                 <span class="input-group-addon">
-                                   D ) <input type="radio" name="{{$pregunta->id}}" value="D">
+                                   D ) <input type="radio" name="{{$pregunta->id}}" value="D"
+                                   @if($presentacione != null) 
+                                            @foreach($presentacione->preguntas as $respuesta)
+                                                @if($respuesta->pivot->pregunta_id == $pregunta->id && $respuesta->pivot->respuesta == 'D' )
+                                                    checked
+                                                @endif
+                                            @endforeach
+                                    @endif>
                                 </span>
                                 <label id="opd" class="form-control" name="opd" >{{$pregunta->opd}}</label>                            
                                 </div><!-- /input-group -->                            

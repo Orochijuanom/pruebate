@@ -2,11 +2,11 @@
 @section('content')
 <ol class="breadcrumb">
   <li><a href="/docente/">Inicio</a></li>
-  <li class="active">Evaluaciones</li>
+  <li class="active">Asignaciones</li>
 </ol>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Panel de gestión docnete</div>
+  <div class="panel-heading">Panel de gestión docente</div>
   <div class="panel-body">
     @if(count($grados)>0)
         <div class="alert alert-success" role="alert">Los cursos asignados</div>
