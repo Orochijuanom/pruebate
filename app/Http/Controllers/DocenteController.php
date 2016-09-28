@@ -46,7 +46,7 @@ class DocenteController extends Controller
 
         $data = $request->all();
         Pregunta::create($data);
-        return redirect()->back()->with('flash_message', 'Se ha creado la pregunta exitosamente');    
+        return redirect()->back()->with('message', 'Se ha creado la pregunta exitosamente');    
     }
 
     public function crear_estandar(Request $request)

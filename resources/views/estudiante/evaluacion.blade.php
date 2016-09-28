@@ -8,85 +8,82 @@
     <div class="panel panel-default">
         <div class="panel-heading">{{$evaluacione->descripcion}} Grado: {{$evaluacione->asignacione->grado->descripcion}} Materia: {{$evaluacione->asignacione->materia->descripcion}}</div>
             <div class="panel-body">
-            <!-- Creando las preguntas-->
+                <!-- Creando las preguntas-->
                 @if (Session::get('message'))
-                        <div class="alert alert-success">
-                            {{Session::get('message')}}
-                            <br><br>            
-                        </div>
-                    @endif
+                    <div class="alert alert-success">
+                        {{Session::get('message')}}
+                        <br><br>            
+                    </div>
+                @endif
 
-                    @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> Hubo Algunos problemas con tu entrada.<br><br>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> Hubo Algunos problemas con tu entrada.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
 
                 @if(count($preguntas)>0)
                     <form class="form-horizontal" role="form" method="POST" action="/estudiante/evaluacion/{{$evaluacione->id}}/respuestas">
                     {{ csrf_field() }}
                     
-                    @foreach($preguntas as $pregunta)
-                        
-                        <div class="form-group">
-                        <label for="descripcion" class="col-md-4 control-label">Pregunta</label>
-                        <div class="col-md-6">
-                            {!! $pregunta->descripcion !!}                       
-                        </div>
-                        </div>
-                        <hr/>                    
-                        <div class="form-group">
-                            <label for="opa" class="col-md-4 control-label">Opción A</label>
-                            <div class="col-md-6">
-                                <div class="input-group">
-                                <span class="input-group-addon">
-                                    <input type="radio" name="{{$pregunta->id}}" value="A" required>
-                                </span>
-                                <label id="opa" class="form-control" name="opa" >{{$pregunta->opa}}</label>                            
-                                </div><!-- /input-group -->                               
+
+                    @foreach($preguntas as $index => $pregunta)
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Pregunta -  {{ $index + 1 }}</div>
+                            <div class="panel-body">
+                                <p>{!! $pregunta->descripcion !!}</p>
                             </div>
+                            <div class="panel-footer">
+                                <div class="form-group">                            
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">
+                                        A ) <input type="radio" name="{{$pregunta->id}}" value="A" required>
+                                    </span>
+                                    <label id="opa" class="form-control" name="opa" >{{$pregunta->opa}}</label>                            
+                                    </div><!-- /input-group -->                               
+                                </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="opb" class="col-md-4 control-label">Opción B</label>
-                            <div class="col-md-6">
+                        <div class="form-group">                            
+                            <div class="col-md-12">
                                 <div class="input-group">
                                 <span class="input-group-addon">
-                                    <input type="radio" name="{{$pregunta->id}}" value="B">
+                                    B ) <input type="radio" name="{{$pregunta->id}}" value="B">
                                 </span>
                                 <label id="opb" class="form-control" name="opb" >{{$pregunta->opb}}</label>                           
                                 </div><!-- /input-group -->                       
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="opc" class="col-md-4 control-label">Opción C</label>
-                            <div class="col-md-6">
+                        <div class="form-group">                            
+                            <div class="col-md-12">
                                 <div class="input-group">
                                 <span class="input-group-addon">
-                                    <input type="radio" name="{{$pregunta->id}}" value="C">
+                                   C ) <input type="radio" name="{{$pregunta->id}}" value="C">
                                 </span>
                                 <label id="opc" class="form-control" name="opc">{{$pregunta->opc}}</label>                            
                                 </div><!-- /input-group -->
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="descripcion" class="col-md-4 control-label">Opción D</label>
-                            <div class="col-md-6">
+                        <div class="form-group">                            
+                            <div class="col-md-12">
                                 <div class="input-group">
                                 <span class="input-group-addon">
-                                    <input type="radio" name="{{$pregunta->id}}" value="D">
+                                   D ) <input type="radio" name="{{$pregunta->id}}" value="D">
                                 </span>
                                 <label id="opd" class="form-control" name="opd" >{{$pregunta->opd}}</label>                            
                                 </div><!-- /input-group -->                            
                             </div>
-                        </div> 
+                        </div>
+                    </div>                                                       
+                 </div>                      
                                                            
                         
                     @endforeach
@@ -110,15 +107,10 @@
                         </button>
                     </div>
                     
-                    @endif
-                     
-                        
+                    @endif                                             
                     </div>
                     </form>
                 @endif
-
-
-                 
             </div>            
         </div>
         
