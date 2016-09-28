@@ -1,10 +1,10 @@
 @extends('layouts.docente')
 @section('content')
-    <ol class="breadcrumb">
-      <li><a href="/docente/">Inicio</a></li>
-      <li><a href="/docente/evaluacion/">Evaluaciones</a></li>
-      <li class="active">Definición</li>
-    </ol>
+<ol class="breadcrumb">
+    <li><a href="/estudiante/">Inicio</a></li>
+    <li class="active">Evaluación</li>
+</ol>
+
     <div class="panel panel-default">
         <div class="panel-heading">{{$evaluacione->descripcion}} Grado: {{$evaluacione->asignacione->grado->descripcion}} Materia: {{$evaluacione->asignacione->materia->descripcion}}</div>
             <div class="panel-body">

@@ -77,7 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
     
 });
 /** RUTAS ADMINISTRADOR **/
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function () {
     Route::get('/administrador/', function(){
         return view('administrador.index');
     });
@@ -114,7 +114,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('administrador/grados/{id}', 'AdministradorController@updateGrado');
 
     Route::get('administrador/asignaciones/', function() {
-        $asignaciones = App\Asignacione::with('user')->with('grado')->get();
+        $asignaciones = App\Asignacione::with('user')->with('grado')->paginate(7);
         return view('administrador.asignaciones')->withAsignaciones($asignaciones);
         
     });
@@ -135,7 +135,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/estudiante/', function() {
         
         $user_id = Auth::user()->id;
-        $grado = App\User::find($user_id)->grados()->where('grado_user.anio', '=', date('Y'))->first();
+        $grado = App\User::find($user_id)->grados()->where('grado_user.anio', '=', date('Y'))->firstOrFail();
         $asignaciones = App\Grado::find($grado->id)->asignaciones()->with('materia')->with('evaluaciones')->get();
 
         return view('estudiante.index')->withAsignaciones($asignaciones);    

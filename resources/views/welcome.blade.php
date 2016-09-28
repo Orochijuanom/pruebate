@@ -71,8 +71,9 @@
                     Pruebate
                 </div>
                 <div class="links">
+                    <a href="{{ url('/administrador') }}">Administrador</a>
                     <a href="{{ url('/docente') }}">Docentes</a>
-                    <a href="{{ url('/estudiantes') }}">Estudiantes</a>                    
+                    <a href="{{ url('/estudiante') }}">Estudiantes</a>                    
                 </div>
             </div>
         </div>

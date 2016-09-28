@@ -1,5 +1,10 @@
 @extends('layouts.docente')
 @section('content')
+<ol class="breadcrumb">
+    <li><a href="/administrador/">Inicio</a></li>
+    <li><a href="/administrador/grados">Grados</a></li>
+    <li class="active">Crear Grados</li>
+</ol>
     <div class="panel panel-default">
         <div class="panel-heading">Crear grados</div>
             <div class="panel-body">

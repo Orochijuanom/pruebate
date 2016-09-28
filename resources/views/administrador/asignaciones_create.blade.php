@@ -1,5 +1,9 @@
 @extends('layouts.docente')
-@section('content')
+@section('content')<ol class="breadcrumb">
+    <li><a href="/administrador/">Inicio</a></li>
+    <li><a href="/administrador/asignaciones">Asignaciones</a></li>
+    <li class="active">Crear Asignación</li>
+</ol>
     <div class="panel panel-default">
         <div class="panel-heading">Realizar asignación academica</div>
             <div class="panel-body">

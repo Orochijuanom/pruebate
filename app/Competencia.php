@@ -8,7 +8,7 @@ class Competencia extends Model
 {
     protected $table = 'competencias';
 
-    protected $fillable = ['descripcion', 'estandare_id', 'competencia_id'];
+    protected $fillable = ['descripcion', 'estandare_id'];
 
     public function estandare(){
         return $this->belongsTo('App\Estandare');

@@ -1,6 +1,9 @@
-
- @extends('layouts.docente')
+@extends('layouts.docente')
 @section('content')
+<ol class="breadcrumb">
+    <li><a href="/administrador/">Inicio</a></li>
+    <li class="active">Docentes</li>
+</ol>
     <div class="panel panel-default">
         <div class="panel-heading">Panel de gestión de docentes </div>
             <div class="panel-body">

@@ -1,5 +1,9 @@
 @extends('layouts.docente')
 @section('content')
+<ol class="breadcrumb">
+    <li><a href="/administrador/">Inicio</a></li>
+    <li class="active">Asignaciones</li>
+</ol>
     <div class="panel panel-default">
         <div class="panel-heading">Panel de gestión de asignación academica </div>
             <div class="panel-body">
@@ -53,9 +57,11 @@
                                             <div>{{ $asignacione->user->name }}</div>
                                         </td>                                        
                                     </tr>
-                                @endforeach
+                                @endforeach                                
                             </tbody>
                         </table>
+                        {!! $asignaciones->links() !!}
+                        <br/>
                     @else
 
                         <p class='alert alert-info'><strong>Whoops!</strong> No se encuentran asignciones en el la plataforma.</p>
