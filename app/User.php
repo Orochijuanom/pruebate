@@ -17,7 +17,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'role_id',
     ];
-
+    protected $table = 'users';
     /**
      * The attributes that should be hidden for arrays.
      *
