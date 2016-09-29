@@ -13,4 +13,6 @@ class Materia extends Model
     public function asignaciones(){
         return $this->hasMany('App\Asignacione');
     }
+
+    
 }
