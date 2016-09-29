@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Observers;
-class GradoObserver
+class LogObserver
 {
     /**
      * Listen to the User created event.
@@ -21,7 +21,7 @@ class GradoObserver
      * @param  User  $user
      * @return void
      */
-    public function deleting(Grado $grado)
+    public function deleted($table)
     {
         //
     }
