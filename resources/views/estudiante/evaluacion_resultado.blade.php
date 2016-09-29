@@ -39,7 +39,17 @@
                                 <p>{!! $pregunta->descripcion !!}</p>
                             </div>
                             <div class="panel-footer">
-                                <div class="form-group">                            
+                                <div class="form-group
+                                @if($presentacione != null) 
+                                    @foreach($presentacione->preguntas as $respuesta)
+                                        @if($respuesta->pivot->pregunta_id == $pregunta->id && $respuesta->pivot->respuesta == $pregunta->respuesta )
+                                            has-success
+                                        @elseif($respuesta->pivot->pregunta_id == $pregunta->id && $respuesta->pivot->respuesta != $pregunta->respuesta)
+                                            
+                                            has-error
+                                        @endif
+                                    @endforeach
+                                @endif">                            
                                 <div class="col-md-12">
                                     <div class="input-group">
                                     <span class="input-group-addon">
