@@ -43,4 +43,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Grado');
     }
 
+    public function logs(){
+        return $this->hasMany('App\Log');
+    }
+
 }

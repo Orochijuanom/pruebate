@@ -151,6 +151,12 @@ Route::group(['middleware' => 'auth','middleware' => 'estudiante'], function () 
         $evaluacione  = App\Evaluacione::find($id)->with('asignacione')->first();
         $preguntas = App\Evaluacione::find($id)->preguntas()->paginate(5);
         
+
+        if($evaluacione->limite < date('Y-m-d h:i:s')){
+            $presentacione = $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '1')->orderBy('created_at', 'desc')->with('preguntas')->first();
+            $limite = 1;
+            return view('estudiante.evaluacion_resultado')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione)->withLimite($limite);
+        }
         $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '0')->orderBy('created_at', 'desc')->with('preguntas')->first();
         
         if(!$presentacione){
