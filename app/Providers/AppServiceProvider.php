@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-use App\Observers\GradoObserver;
+use App\Observers\LogObserver;
 use Illuminate\Support\ServiceProvider;
 use App\Grado;
 use App\User;
@@ -16,11 +16,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Grado::observe(GradoObserver::class);
-        User::observe(GradoObserver::class);
-        Evaluacione::observe(GradoObserver::class);
-        Pregunta::observe(GradoObserver::class);
-        //
+        //Registrando los observadores
+        Grado::observe(LogObserver::class);
+        User::observe(LogObserver::class);
+        Evaluacione::observe(LogObserver::class);
+        Pregunta::observe(LogObserver::class);
+        
     }
 
     /**
