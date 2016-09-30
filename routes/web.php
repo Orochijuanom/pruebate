@@ -133,7 +133,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
     Route::post('administrador/asignaciones','AdministradorController@storeAsignacione');
 
     Route::get('administrador/logs', function() {
-        $logs = App\Log::all()->paginate(10);
+        $logs = App\Log::paginate(10);
         return view('administrador.logs')->withLogs($logs);
     });
 
@@ -164,7 +164,13 @@ Route::group(['middleware' => 'auth','middleware' => 'estudiante'], function () 
             }else{
                 $intentos = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '1')->count();
                 $presentacione = $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '1')->orderBy('created_at', 'desc')->with('preguntas')->first();
-                return view('estudiante.evaluacion_resultado')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione)->withErrors(['message' => 'Ha utilizado '.$intentos.' intentos para presentar su prueba de los '.$evaluacione->intentos.' que tiene disponibles'])->withLimite($limite)->withIntentos($intentos);
+
+                if(!$presentacione){
+                    return redirect('estudiante/evaluacion/'.$evaluacione->id.'/nuevo');
+                }else{
+                    return view('estudiante.evaluacion_resultado')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione)->withErrors(['message' => 'Ha utilizado '.$intentos.' intentos para presentar su prueba de los '.$evaluacione->intentos.' que tiene disponibles'])->withLimite($limite)->withIntentos($intentos);
+                }
+                
             
             }
             $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '0')->orderBy('created_at', 'desc')->with('preguntas')->first();
@@ -175,6 +181,7 @@ Route::group(['middleware' => 'auth','middleware' => 'estudiante'], function () 
             }
 
         }else{
+            $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '0')->orderBy('created_at', 'desc')->with('preguntas')->first();
             return view('estudiante.evaluacion')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione);
     
         }
