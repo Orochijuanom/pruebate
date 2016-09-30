@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Observers;
+use App\Log;
 class LogObserver
 {
     /**
@@ -11,8 +12,13 @@ class LogObserver
      */
     public function created($table)
     {
-        //die(\Auth::user()->name);
-        dd($objeto);
+        //Registrando la transacción
+        Log::create([
+            'user_id' => \Auth::user()->id,
+            'tabla' => $table->table,
+            'operacion' => 'AGREGAR',
+            'descripcion' => $table->attributes
+        ]);  
     }
 
     /**
@@ -23,6 +29,23 @@ class LogObserver
      */
     public function deleted($table)
     {
-        //
+        //Registrando la transacción
+        Log::create([
+            'user_id' => \Auth::user()->id,
+            'tabla' => $table->table,
+            'operacion' => 'ELIMINAR',
+            'descripcion' => $table->attributes
+        ]);
+    }
+
+    public function updated($table)
+    {
+        //Registrando la transacción
+        Log::create([
+            'user_id' => \Auth::user()->id,
+            'tabla' => $table->table,
+            'operacion' => 'ACTUALIZAR',
+            'descripcion' => $table->attributes
+        ]);  
     }
 }
