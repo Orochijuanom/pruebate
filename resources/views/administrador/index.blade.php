@@ -42,6 +42,20 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="{{asset('img/logs.png')}}" alt="..."/>
+                    <div class="caption">
+                        <h3>Logs</h3>
+                        <p>Transacciones registradas en el sistema</p>
+                        <p>
+                            <a href="/administrador/logs" class="btn btn-primary" role="button">Entrar</a> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>    
 </div>
