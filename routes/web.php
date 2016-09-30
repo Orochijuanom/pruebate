@@ -132,6 +132,11 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
 
     Route::post('administrador/asignaciones','AdministradorController@storeAsignacione');
 
+    Route::get('administrador/logs', function() {
+        $logs = App\Log::all()->paginate(10);
+        return view('administrador.logs')->withLogs($logs);
+    });
+
 });
 /** RUTAS ESTUDIANTE **/
 Route::group(['middleware' => 'auth','middleware' => 'estudiante'], function () {
@@ -144,29 +149,38 @@ Route::group(['middleware' => 'auth','middleware' => 'estudiante'], function () 
         return view('estudiante.index')->withAsignaciones($asignaciones);    
     });
 
-    Route::get('estudiante/evaluacion/{id}', function($id) {
+    Route::get('estudiante/evaluacion/{id}/{new?}', function($id, $new = null) {
         $limite = 0;
         $intentos = 0;
         $presentacione = null;
         $evaluacione  = App\Evaluacione::find($id)->with('asignacione')->first();
         $preguntas = App\Evaluacione::find($id)->preguntas()->paginate(5);
         
+        if(!$new){
+            if($evaluacione->limite < date('Y-m-d h:i:s')){
+                $presentacione = $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '1')->orderBy('created_at', 'desc')->with('preguntas')->first();
+                $limite = 1;
+                return view('estudiante.evaluacion_resultado')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione)->withErrors(['message' => 'Se ha pasado de la fecha limite '.$evaluacione->limite.' para presentar su prueba'])->withLimite($limite);
+            }else{
+                $intentos = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '1')->count();
+                $presentacione = $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '1')->orderBy('created_at', 'desc')->with('preguntas')->first();
+                return view('estudiante.evaluacion_resultado')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione)->withErrors(['message' => 'Ha utilizado '.$intentos.' intentos para presentar su prueba de los '.$evaluacione->intentos.' que tiene disponibles'])->withLimite($limite)->withIntentos($intentos);
+            
+            }
+            $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '0')->orderBy('created_at', 'desc')->with('preguntas')->first();
+            
+            if(!$presentacione){
+            $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '1')->orderBy('created_at', 'desc')->with('preguntas')->first();
+            
+            }
 
-        if($evaluacione->limite < date('Y-m-d h:i:s')){
-            $presentacione = $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '1')->orderBy('created_at', 'desc')->with('preguntas')->first();
-            $limite = 1;
-            return view('estudiante.evaluacion_resultado')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione)->withLimite($limite);
-        }
-        $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '0')->orderBy('created_at', 'desc')->with('preguntas')->first();
-        
-        if(!$presentacione){
-           $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', Auth::user()->id)->where('estado', '=', '1')->orderBy('created_at', 'desc')->with('preguntas')->first();
-           
+        }else{
+            return view('estudiante.evaluacion')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione);
+    
         }
         
 
-        return view('estudiante.evaluacion')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione);
-    });
+        });
 
     Route::post('estudiante/evaluacion/{id}/respuestas', 'EstudianteController@storeRespuesta');
 });

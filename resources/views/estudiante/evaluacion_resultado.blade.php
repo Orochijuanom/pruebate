@@ -18,7 +18,7 @@
 
                 @if (count($errors) > 0)
                         <div class="alert alert-danger">
-                            <strong>Whoops!</strong> Hubo Algunos problemas con tu entrada.<br><br>
+                          
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -131,19 +131,13 @@
                     <div class="form-group">
                     
                     <input type="hidden" name="pagina" value="{{$preguntas->currentPage()}}" />
-                    @if($preguntas->currentPage() != $preguntas->lastPage() )
-                    <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary" name="estado" value="0">
-                            Guardar y continuar
-                        </button>
-                    </div>
+                    @if($limite != 1 )
+                        @if($intentos < $evaluacione->intentos)
+                            <a href="/estudiante/evaluacion/{{$evaluacione->id}}/nuevo" class="btn btn-default"><i class="fa fa-btn fa-plus"></i>Realizar nuevo intento</a>
+                        @endif
                     
                     @else
-                    <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary" name="estado" value="1">
-                            Guardar y finalizar
-                        </button>
-                    </div>
+                    
                     
                     @endif                                             
                     </div>
