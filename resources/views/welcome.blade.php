@@ -68,7 +68,7 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">
-                    Pruebate
+                    <img src="{{asset('img/logo.png')}}" alt="logo" />
                 </div>
                 <div class="links">
                     <a href="{{ url('/administrador') }}">Administrador</a>
