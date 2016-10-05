@@ -29,7 +29,10 @@
 
                     @if (count($docentes) > 0)
 
-                     <div class="alert alert-success" role="alert">Los docentes creados</div>
+                     <div class="alert alert-success" role="alert">
+                        Los docentes creados
+                        <a href="/reportes/docentes"><span class="pull-right clickable"><i class="fa fa-download"></i></span></a>
+                     </div>
 
                         <table class="table table-bordered">
 

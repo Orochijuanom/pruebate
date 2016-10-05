@@ -22,6 +22,7 @@ Auth::routes();
 /** RUTAS DOCENTE **/
 Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
 
+
     Route::get('/docente/', function(){
         return view('docente.index');
     });
@@ -81,6 +82,14 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
 });
 /** RUTAS ADMINISTRADOR **/
 Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function () {
+
+
+    /** RUTAS REPORTES **/
+    Route::get('reportes/logs', 'ReportController@logs');
+    Route::get('reportes/docentes', 'ReportController@docentes');
+    Route::get('reportes/grados', 'ReportController@grados');
+    Route::get('reportes/asignacion', 'ReportController@asignacion');
+
     Route::get('/administrador/', function(){
         return view('administrador.index');
     });
@@ -190,5 +199,8 @@ Route::group(['middleware' => 'auth','middleware' => 'estudiante'], function () 
         });
 
     Route::post('estudiante/evaluacion/{id}/respuestas', 'EstudianteController@storeRespuesta');
+
+
+
 });
 

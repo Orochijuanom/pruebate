@@ -29,7 +29,10 @@
 
                     @if (count($asignaciones) > 0)
 
-                     <div class="alert alert-success" role="alert">La asignación academica</div>
+                     <div class="alert alert-success" role="alert">
+                        La asignación academica
+                        <a href="/reportes/asignacion"><span class="pull-right clickable"><i class="fa fa-download"></i></span></a>
+                    </div>
 
                         <table class="table table-bordered">
 

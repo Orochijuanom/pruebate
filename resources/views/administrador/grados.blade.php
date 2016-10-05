@@ -29,7 +29,10 @@
 
                     @if (count($grados) > 0)
 
-                     <div class="alert alert-success" role="alert">Los grados creados</div>
+                     <div class="alert alert-success" role="alert">
+                        Los grados creados
+                        <a href="/reportes/grados"><span class="pull-right clickable"><i class="fa fa-download"></i></span></a>
+                    </div>
 
                         <table class="table table-bordered">
 
