@@ -8,13 +8,15 @@ class GradoUser extends Model
 {
     protected $table = 'grado_user';
 
-    protected $fillable = ['grado_id', 'user_id', 'annio'];
+    public $timestamps = false;
+
+    protected $fillable = ['grado_id', 'user_id', 'anio'];
 
     public function user(){
         return $this->belongsTo('App\User');
     }
 
     public function grado(){
-        return $this->belongsTo('App\Evaluacione');
+        return $this->belongsTo('App\Grado');
     }    
 }

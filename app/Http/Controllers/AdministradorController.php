@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Grado;
 use App\Asignacione;
 use App\User;
+use App\GradoUser;
 
 use App\Http\Requests;
 use Redirect;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdministradorController extends Controller
 {
@@ -109,59 +111,58 @@ class AdministradorController extends Controller
         return Redirect::back() -> with('message', 'el docente'.$asignacione->user->name.' ha sido asignado a la materia '.$asignacione->materia->descripcion.' en el grado '.$asignacione->grado->descripcion);
     }
 
-    public function storeEstudiante(Request $request){
-        <?php
- 
-namespace App\Http\Controllers;
-use Mail;
-use App\User;
-use Illuminate\Http\Request;
-use App\Http\Requests;
-use Maatwebsite\Excel\Facades\Excel;
- 
-class ImportController extends Controller
-{
-    public function store(Request $request)
-    {
- 
+    public function storeEstudiante($id, Request $request){
+        $id = $id;
+        
         $file = $request->file('file');
         //obtenemos el nombre del archivo
         //$nombre = $file->getClientOriginalName();
         //indicamos que queremos guardar un nuevo archivo en el disco local
         //\Storage::disk('local')->put($nombre,  \File::get($file));    
  
-        Excel::load($file, function($reader) {
+        Excel::load($file, function($reader)  use($id){
+            
             foreach ($reader->get() as $user) {                
                 try {
-                    //Creamos el usuario
-                    $password = str_random(8);
-                    $user = User::create([
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'password' => bcrypt($password)
-                    ]);
+                     
+                    $userdb = User::where('email', '=', $user->email)->first();
+                    if(!$userdb){
+                        
+                        $userdb = User::create([
+                            'name' => $user->nombre,
+                            'email' => $user->email,
+                            'role_id' => 3,
+                            'password' => bcrypt($user->identidad)
+                        ]);
+                    }
+
+                    $grado_user = GradoUser::where('user_id', '=', $userdb->id)->where('anio', '=', date('Y'))->first();
+
+                    if(!$grado_user){
+                      
+                        $grado_user = GradoUser::create([
+                            'user_id' => $userdb->id,
+                            'grado_id' => $id,
+                            'anio' => date('Y')
+                        ]);
+                    }else{
+                        $grado_user->grado_id = $id;
+                        $grado_user->save();
+                    }
+                   
+                    
  
-                    $this->sendEmail($user, $password); // Enviamos el mail
-                } catch (Exception $e) {
-                    continue;
+                    
+                } catch (\PDOException $exception) {
+                    return Redirect::back() -> withErrors(['message' => 'Ha ocurrido un error en la consulta '.$exception->getMessage()]);
+
                 }
                
             }
         });
         //return "archivo guardado";
-        return User::all();
-    }
- 
- 
-    private function sendEmail($user, $password){
-        $data = array('email' => $user->email, 'subject' => 'Asignacion de clave', 'body' => $password);
- 
-        Mail::send('layouts.emails', $data, function ($m) use ($user) {
-            $m->from('ajimenez@itfip.edu.co', 'Confirmacion password');
-            $m->to($user->email, $user->name)->subject('Your Reminder!');
-        });
-    }
-}
+        return Redirect::back() -> with('message', 'Los estudiantes han sido cargados al grado');
+    
 
     }
 

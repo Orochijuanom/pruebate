@@ -47,4 +47,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Log');
     }
 
+    public function gradousers(){
+        return $this->hasMany('App\GradoUser');
+
+    }
+
 }

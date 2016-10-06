@@ -47,7 +47,9 @@
                                     <tr>
                                         <!-- Task Name -->
                                         <td class="table-text">
-                                            <div><a href="/administrador/grados/{{$grado->id}}">{{ $grado->descripcion }}</a></div>
+                                            <div><a href="/administrador/grados/{{$grado->id}}">{{ $grado->descripcion }}</a>
+                                            <a href="/administrador/grados/{{$grado->id}}/estudiantes/"><span class="pull-right clickable"><i class="fa fa-upload"></i></span></a>
+                                            </div>
                                         </td>                                       
                                     </tr>
                                 @endforeach

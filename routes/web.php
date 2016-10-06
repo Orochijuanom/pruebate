@@ -131,6 +131,13 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
 
     Route::put('administrador/grados/{id}', 'AdministradorController@updateGrado');
 
+    Route::get('administrador/grados/{id}/estudiantes', function($id) {
+        $grado = App\Grado::find($id);
+        return view('administrador.grados_estudiantes')->withGrado($grado);
+    });
+
+    Route::put('administrador/grados/{id}/estudiantes', 'AdministradorController@storeEstudiante');
+
     Route::get('administrador/asignaciones/', function() {
         $asignaciones = App\Asignacione::with('user')->with('grado')->paginate(7);
         return view('administrador.asignaciones')->withAsignaciones($asignaciones);
@@ -157,11 +164,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
         return view('administrador.logs')->withLogs($logs);
     });
 
-    Route::get('administrador/estudiantes', function() {
-        return view('administrador.estudiantes');
-    });
-
-    Route::post('administrador/estudiantes', 'AdministradorController@storeEstudiante');
+    
 
 });
 /** RUTAS ESTUDIANTE **/
