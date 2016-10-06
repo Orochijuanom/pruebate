@@ -74,7 +74,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
     });
 
     Route::get('/docente/index_evaluacion/estudiantes/{id}', function($id){
-        $estudiantes = App\Grado::find($id)->with('users')->get();
+        $estudiantes = App\Grado::find($id)->users()->get();        
         return view('docente.estudiantes')
             ->with('estudiantes',$estudiantes);
     });

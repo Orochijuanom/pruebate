@@ -2,7 +2,8 @@
 @section('content')
     <ol class="breadcrumb">
         <li><a href="/docente/">Inicio</a></li>
-        <li class="active">Asignaciones</li>
+        <li><a href="docente/index_evaluacion">Asignaciones</a></li>        
+        <li class="active">Estudiantes</li>
     </ol>
     <div class="panel panel-default">
         <div class="panel-heading">Panel de gestión evaluación</div>
@@ -12,19 +13,18 @@
                 <table class="table table-bordered">  
                     <thead>
                         <th>N.</th>
-                        <th>Grado</th>
-                        <th>Materia</th>
+                        <th>Estudiante</th>
+                        <th>Intentos</th>
                         <th>Opciones</th>
                     </thead>  
                     <tbody>
                         @foreach($estudiantes as $estudiante)
                             <tr>
                                 <td scope="row">1</td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <a href="/docente/evaluacion/{{$grado->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    <a href="/docente/index_evaluacion/estudiantes/{{$grado->id}}"><i class="fa fa-users" aria-hidden="true"></i></a>
+                                <td>{{$estudiante->name}}</td>
+                                <td>{{$estudiante->presentaciones}}</td>                                
+                                <td>                                    
+                                    <a href="/docente/index_evaluacion/{{$estudiante->id}}/{{$estudiante->presentacio_evaluacion}}"><i class="fa fa-users" aria-hidden="true"></i></a>
                                 </td>
                                                         
                             </tr>    
