@@ -73,6 +73,11 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
             ->with('estandar', $estandar);
     });
 
+    Route::get('/docente/index_evaluacion/estudiantes/{id}', function($id){
+        $estudiantes = App\Grado::find($id)->with('users')->get();
+        return view('docente.estudiantes')
+            ->with('estudiantes',$estudiantes);
+    });
     Route::post('/docente/crear_evaluacion/', 'DocenteController@crear_evaluacion');
     Route::post('/docente/definicion/', 'DocenteController@crear_pregunta');
     Route::post('/docente/crear_estandar/', 'DocenteController@crear_estandar');
