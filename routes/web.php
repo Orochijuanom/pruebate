@@ -151,6 +151,12 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
         return view('administrador.logs')->withLogs($logs);
     });
 
+    Route::get('administrador/estudiantes', function() {
+        return view('administrador.estudiantes');
+    });
+
+    Route::post('administrador/estudiantes', 'AdministradorController@storeEstudiante');
+
 });
 /** RUTAS ESTUDIANTE **/
 Route::group(['middleware' => 'auth','middleware' => 'estudiante'], function () {
