@@ -65,7 +65,7 @@
 
                     @endif
 
-                    <a href="/register" class="btn btn-default"><i class="fa fa-btn fa-plus"></i>Crear Docente</a>
+                    <a href="/register" class="btn btn-default"><i class="fa fa-btn fa-plus"></i>Crear Usuario</a>
 
                        
 

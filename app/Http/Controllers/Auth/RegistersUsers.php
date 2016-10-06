@@ -17,7 +17,7 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {   
-        $roles = Role::all();
+        $roles = Role::where('id', '!=', '3')->get();
         return view('auth.register')->with('roles', $roles);
     }
 
