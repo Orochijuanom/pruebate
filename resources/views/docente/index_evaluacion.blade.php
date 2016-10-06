@@ -23,7 +23,11 @@
                         <td scope="row">1</td>
                         <td>{{$grado->grado->descripcion}}</td>
                         <td>{{$grado->materia->descripcion}}</td>
-                        <td><a href="/docente/evaluacion/{{$grado->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>                        
+                        <td>
+                            <a href="/docente/evaluacion/{{$grado->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a href="/docente/index_evaluacion/estudiantes/{{$grado->id}}"><i class="fa fa-users" aria-hidden="true"></i></a>
+                        </td>
+                                                
                     </tr>    
                 @endforeach
             </tbody>
