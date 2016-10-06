@@ -10,6 +10,7 @@ use App\User;
 use App\Grado;
 use App\Asignacione;
 
+
 class ReportController extends Controller
 {
     public function logs()
@@ -52,5 +53,14 @@ class ReportController extends Controller
         })->export('xls');
     }
 
+    public function usuarios()
+    {
+         Excel::create('usuarios', function($excel) {
+            $excel->sheet('usuarios', function($sheet) {
+                $usuarios = User::all();
+                $sheet->fromArray($usuarios);
+            });
+        })->export('xls');
+    }
 
 }

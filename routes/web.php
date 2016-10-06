@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
     Route::get('reportes/docentes', 'ReportController@docentes');
     Route::get('reportes/grados', 'ReportController@grados');
     Route::get('reportes/asignacion', 'ReportController@asignacion');
+    Route::get('reportes/usuarios', 'ReportController@usuarios');
 
     Route::get('/administrador/', function(){
         return view('administrador.index');
@@ -145,6 +146,11 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
     });
 
     Route::post('administrador/asignaciones','AdministradorController@storeAsignacione');
+    Route::get('/administrador/usuarios', function(){
+        $usuarios = App\User::paginate(10);
+        return view('administrador.usuarios')
+            ->with('usuarios',$usuarios);
+    });
 
     Route::get('administrador/logs', function() {
         $logs = App\Log::paginate(10);

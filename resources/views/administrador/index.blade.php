@@ -60,10 +60,10 @@
                 <div class="thumbnail">
                     <img src="{{asset('img/estudiantes.png')}}" alt="..."/>
                     <div class="caption">
-                        <h3>Estudiantes</h3>
-                        <p>Carga los Estudiantes al sistema</p>
+                        <h3>Usuarios</h3>
+                        <p>Usuarios registrados en el sistema</p>
                         <p>
-                            <a href="/administrador/estudiantes" class="btn btn-primary" role="button">Entrar</a> 
+                            <a href="/administrador/usuarios" class="btn btn-primary" role="button">Entrar</a> 
                         </p>
                     </div>
                 </div>
