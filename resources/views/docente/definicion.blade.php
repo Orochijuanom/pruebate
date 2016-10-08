@@ -38,6 +38,13 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Pregunta</div>
                             <div class="panel-body">
+                                <select class="form-control" name="competencia_id">
+                                    <option value="-1">--SELECCIONE--</option>
+                                    @foreach($competencias as $competencia)
+                                        <option value="{{$competencia->id}}">{{$competencia->descripcion}}</option>
+                                    @endforeach
+                                </select>                            
+                                <br/>
                                 <p><textarea id="descripcion" class="form-control ckeditor" name="descripcion" required autofocus></textarea></p>
                             </div>
                             <div class="panel-footer">
@@ -107,6 +114,7 @@
                             <th>Op B</th>
                             <th>Op C</th>
                             <th>Op D</th>
+                            <th>Competencia</th>
                         </thead>  
                         <tbody>
                             @foreach($preguntas as $pregunta)
@@ -117,6 +125,7 @@
                                     <td>{{$pregunta->opb}}</td>
                                     <td>{{$pregunta->opc}}</td>
                                     <td>{{$pregunta->opd}}</td>
+                                    <td>{{$pregunta->competencia->descripcion}}</td>
                                 </tr>    
                             @endforeach
                         </tbody>

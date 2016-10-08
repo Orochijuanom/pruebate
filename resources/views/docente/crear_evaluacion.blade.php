@@ -55,42 +55,7 @@
                             <input id="apoyo" type="text" class="form-control" name="apoyo" required>                            
                         </div>
                     </div>
-                    <hr/>
                     
-                    <div class="form-group">
-                        <label for="apoyo" class="col-md-4 control-label">Competencias 1</label>
-                        <div class="col-md-6">
-                            <select class="form-control" name="competencia[]">
-                                <option value="-1">--SELECCIONE--</option>
-                                @foreach($competencias as $competencia)
-                                    <option value="{{$competencia->id}}">{{$competencia->descripcion}}</option>
-                                @endforeach
-                            </select>                            
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="apoyo" class="col-md-4 control-label">Competencia 2</label>
-                        <div class="col-md-6">
-                            <select class="form-control" name="competencia[]">
-                                <option value="-1">--SELECCIONE--</option>
-                                @foreach($competencias as $competencia)
-                                    <option value="{{$competencia->id}}">{{$competencia->descripcion}}</option>
-                                @endforeach
-                            </select>                            
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="apoyo" class="col-md-4 control-label">Competencia 3</label>
-                        <div class="col-md-6">
-                            <select class="form-control" name="competencia[]">
-                                <option value="-1">--SELECCIONE--</option>
-                                @foreach($competencias as $competencia)
-                                    <option value="{{$competencia->id}}">{{$competencia->descripcion}}</option>
-                                @endforeach
-                            </select>                            
-                        </div>
-                    </div>
                     <input type="hidden" name="asignacione_id" value="{{$id}}" />                    
                     
                     <div class="form-group">

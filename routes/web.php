@@ -43,16 +43,18 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
     
     Route::get('/docente/evaluacion/definicion/{id}', function($id){
         $preguntas = App\Pregunta::where('evaluacione_id','=',$id)->get();
+        $competencias = App\Competencia::all();
         return view('docente.definicion')
                         ->with('id', $id)
-                        ->with('preguntas',$preguntas);
+                        ->with('preguntas',$preguntas)
+                        ->with('competencias',$competencias);
     });
 
     Route::get('/docente/crear_evaluacion/{id}', function($id){
-        $competencias = App\Competencia::all();
+        
         return view('docente.crear_evaluacion')
-                ->with('id', $id)
-                ->with('competencias', $competencias);
+                ->with('id', $id);
+                
     });
 
     Route::get('/docente/estandares/', function(){

@@ -24,9 +24,6 @@ class DocenteController extends Controller
 
         $data = $request->all();        
         $evaluacion = Evaluacione::create($data);
-        foreach($request->competencia as $competencia){
-            if ($competencia >= 1) $evaluacion->competencias()->attach($competencia);
-        }
         
         return redirect()->back()->with('flash_message', 'Se ha creado la evaluación exitosamente');
         
@@ -40,6 +37,7 @@ class DocenteController extends Controller
             'opb' => 'required',
             'opc' => 'required',
             'opd' => 'required',
+            'competencia_id' => 'required',
             'respuesta' => 'required',
             'evaluacione_id' => 'required'
         ]);

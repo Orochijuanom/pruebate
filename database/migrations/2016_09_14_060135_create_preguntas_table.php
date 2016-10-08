@@ -16,6 +16,7 @@ class CreatePreguntasTable extends Migration
         Schema::create('preguntas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('evaluacione_id')->unsigned();
+            $table->integer('competencia_id')->unsigned();
             $table->text('descripcion');
             $table->string('opa');
             $table->string('opb');
@@ -28,6 +29,11 @@ class CreatePreguntasTable extends Migration
                   ->references('id')->on('evaluaciones')
                   ->onUpdate('no action')
                   ->onDelete('restrict');
+
+            $table->foreign('competencia_id')
+                  ->references('id')->on('competencias')
+                  ->onUpdate('no action')
+                  ->onDelete('restrict');                  
 
         });
     }
