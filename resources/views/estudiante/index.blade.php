@@ -23,7 +23,7 @@
                                 </ul>
                             </div>
                     @endif
-
+                   
                     @if (count($asignaciones) > 0)
                         @foreach($asignaciones as $asignacione)
                             <ul>
@@ -41,12 +41,16 @@
                                                         @endif
                                                     </a>
                                             @endforeach
+                                        
                                         @endif
                                     </ul>
                             </ul>
                         @endforeach
 
-                     
+                    @else
+                    
+                        <div class="alert alert-warning" role="alert">No se encontraron evaluaciones asignadas</div>
+               
                     @endif
                        
 

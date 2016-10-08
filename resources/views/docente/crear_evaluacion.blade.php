@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <label for="fecha_presentacion" class="col-md-4 control-label">Fecha presentación</label>
                         <div class="col-md-6">
-                            <input id="fecha_presentacion" type="date" class="form-control" name="limite" required>                            
+                            <input id="fecha_presentacion" type="datetime-local" class="form-control" name="limite" required>                            
                         </div>
                     </div>
 

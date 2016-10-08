@@ -16,6 +16,11 @@
                     </div>
                 @endif
 
+                <div class="alert alert-success" role="alert">
+                    <ul>
+                        <li><a href="{{$evaluacione->apoyo}}" target="_blank">Material de apoyo disponible</a>
+                    </ul>
+                </div>
                 @if (count($errors) > 0)
                         <div class="alert alert-danger">
                           
@@ -42,9 +47,9 @@
                                 <div class="form-group
                                 @if($presentacione != null) 
                                     @foreach($presentacione->preguntas as $respuesta)
-                                        @if($respuesta->pivot->pregunta_id == $pregunta->id && $respuesta->pivot->respuesta == $pregunta->respuesta )
+                                        @if($respuesta->pivot->respuesta == 'A' && $respuesta->pivot->respuesta == $pregunta->respuesta )
                                             has-success
-                                        @elseif($respuesta->pivot->pregunta_id == $pregunta->id && $respuesta->pivot->respuesta != $pregunta->respuesta)
+                                        @elseif($respuesta->pivot->respuesta == 'A' && $respuesta->pivot->respuesta != $pregunta->respuesta)
                                             
                                             has-error
                                         @endif
@@ -67,7 +72,17 @@
                                 </div>
                         </div>
 
-                        <div class="form-group">                            
+                        <div class="form-group
+                                @if($presentacione != null) 
+                                    @foreach($presentacione->preguntas as $respuesta)
+                                        @if($respuesta->pivot->respuesta == 'B' && $respuesta->pivot->respuesta == $pregunta->respuesta )
+                                            has-success
+                                        @elseif($respuesta->pivot->respuesta == 'B' && $respuesta->pivot->respuesta != $pregunta->respuesta)
+                                            
+                                            has-error
+                                        @endif
+                                    @endforeach
+                                @endif">                            
                             <div class="col-md-12">
                                 <div class="input-group">
                                 <span class="input-group-addon">
@@ -85,7 +100,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group">                            
+                        <div class="form-group
+                                @if($presentacione != null) 
+                                    @foreach($presentacione->preguntas as $respuesta)
+                                        @if($respuesta->pivot->respuesta == 'C' && $respuesta->pivot->respuesta == $pregunta->respuesta )
+                                            has-success
+                                        @elseif($respuesta->pivot->respuesta == 'C' && $respuesta->pivot->respuesta != $pregunta->respuesta)
+                                            
+                                            has-error
+                                        @endif
+                                    @endforeach
+                                @endif">                            
                             <div class="col-md-12">
                                 <div class="input-group">
                                 <span class="input-group-addon">
@@ -103,7 +128,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group">                            
+                        <div class="form-group
+                                @if($presentacione != null) 
+                                    @foreach($presentacione->preguntas as $respuesta)
+                                        @if($respuesta->pivot->respuesta == 'D' && $respuesta->pivot->respuesta == $pregunta->respuesta )
+                                            has-success
+                                        @elseif($respuesta->pivot->respuesta == 'D' && $respuesta->pivot->respuesta != $pregunta->respuesta)
+                                            
+                                            has-error
+                                        @endif
+                                    @endforeach
+                                @endif">                            
                             <div class="col-md-12">
                                 <div class="input-group">
                                 <span class="input-group-addon">

@@ -176,10 +176,12 @@ Route::group(['middleware' => 'auth','middleware' => 'estudiante'], function () 
     Route::get('/estudiante/', function() {
         
         $user_id = Auth::user()->id;
-        $grado = App\User::find($user_id)->grados()->where('grado_user.anio', '=', date('Y'))->firstOrFail();
+        $grado = App\User::find($user_id)->grados()->where('grado_user.anio', '=', date('Y'))->first();
         $asignaciones = App\Grado::find($grado->id)->asignaciones()->with('materia')->with('evaluaciones')->get();
-
-        return view('estudiante.index')->withAsignaciones($asignaciones);    
+        
+        return view('estudiante.index')->withAsignaciones($asignaciones); 
+        
+           
     });
 
     Route::get('estudiante/evaluacion/{id}/{new?}', function($id, $new = null) {
