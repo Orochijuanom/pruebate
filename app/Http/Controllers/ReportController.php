@@ -63,4 +63,14 @@ class ReportController extends Controller
         })->export('xls');
     }
 
+    public function estudiantes_grado($id)
+    {        
+        Excel::create('estudiantes_grado', function($excel) use ($id){            
+            $excel->sheet('estudiantes_grado', function($sheet) use ($id){                
+                $usuarios = Grado::find($id)->users()->get();
+                $sheet->fromArray($usuarios);
+            });
+        })->export('xls');
+    }
+
 }

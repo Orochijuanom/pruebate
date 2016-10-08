@@ -17,14 +17,14 @@
                     @endif
 
                     @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> Hubo Algunos problemas con tu entrada.<br><br>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> Hubo Algunos problemas con tu entrada.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
 
                     @if (count($grados) > 0)
@@ -38,7 +38,9 @@
 
                             <!-- Table Headings -->
                             <thead>
-                                <th>Descripcion</th>                                
+                                <th>Descripcion</th>
+                                <th>Descargar usuarios</th>
+                                <th>Cargar usuarios</th>                                
                             </thead>
 
                             <!-- Table Body -->
@@ -48,9 +50,11 @@
                                         <!-- Task Name -->
                                         <td class="table-text">
                                             <div><a href="/administrador/grados/{{$grado->id}}">{{ $grado->descripcion }}</a>
-                                            <a href="/administrador/grados/{{$grado->id}}/estudiantes/"><span class="pull-right clickable"><i class="fa fa-upload"></i></span></a>
+                                            
                                             </div>
-                                        </td>                                       
+                                        </td>
+                                        <td><a href="/reportes/grados/{{$grado->id}}/d_estudiantes/"><span class="pull-right clickable"><i class="fa fa-download"></i></span></a></td>
+                                        <td><a href="/administrador/grados/{{$grado->id}}/estudiantes/"><span class="pull-right clickable"><i class="fa fa-upload"></i></span></a></td>                                       
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -97,6 +97,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
     Route::get('reportes/grados', 'ReportController@grados');
     Route::get('reportes/asignacion', 'ReportController@asignacion');
     Route::get('reportes/usuarios', 'ReportController@usuarios');
+    Route::get('reportes/grados/{id}/d_estudiantes', 'ReportController@estudiantes_grado');
 
     Route::get('/administrador/', function(){
         return view('administrador.index');
@@ -137,6 +138,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
         $grado = App\Grado::find($id);
         return view('administrador.grados_estudiantes')->withGrado($grado);
     });
+    
 
     Route::put('administrador/grados/{id}/estudiantes', 'AdministradorController@storeEstudiante');
 
