@@ -40,6 +40,14 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
                     ->with('grado',$grado)
                     ->with('evaluaciones',$evaluaciones);
     });
+
+    Route::get('/docente/evaluacion/presentacion_estud/{id}', function($id){
+        $estudiantes = App\Presentacione::where('evaluacione_id','=',$id)->get();
+        return view('docente.estudiantes')
+            ->with('estudiantes', $estudiantes);
+    });
+
+   
     
     Route::get('/docente/evaluacion/definicion/{id}', function($id){
         $preguntas = App\Pregunta::where('evaluacione_id','=',$id)->get();
@@ -75,11 +83,34 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
             ->with('estandar', $estandar);
     });
 
-    Route::get('/docente/index_evaluacion/estudiantes/{id}', function($id){
-        $estudiantes = App\Grado::find($id)->users()->get();        
-        return view('docente.estudiantes')
-            ->with('estudiantes',$estudiantes);
+
+    Route::get('/docente/evaluacion/presentacion_estud/{evaluacione_id}/{user_id}', function($evaluacione_id, $user_id) {
+        $limite = 0;
+        $intentos = 0;
+        $presentacione = null;
+        $evaluacione  = App\Evaluacione::find($evaluacione_id)->with('asignacione')->first();
+        $preguntas = App\Evaluacione::find($evaluacione_id)->preguntas()->paginate(5);
+                                
+        $intentos = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', $user_id)->where('estado', '=', '1')->count();
+        $presentacione = $presentacione = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', $user_id)->where('estado', '=', '1')->orderBy('created_at', 'desc')->with('preguntas')->first();
+
+        if(!$presentacione){
+            //FLASH
+        }else{
+            return view('docente.evaluacion_resultado')->withEvaluacione($evaluacione)->withPreguntas($preguntas)->withPresentacione($presentacione)->withErrors(['message' => 'Ha utilizado '.$intentos.' intentos para presentar su prueba de los '.$evaluacione->intentos.' que tiene disponibles'])->withLimite($limite)->withIntentos($intentos);
+        }
     });
+
+    Route::get('/docente/evaluacion/reporte/{evaluacione_id}', function($evaluacione_id){
+        $competencias = App\Pregunta::where('evaluacione_id','=',$evaluacione_id)->select('competencia_id')->groupBy('competencia_id')->get();
+        dd($competencias);
+        $evaluacione  = App\Evaluacione::find($evaluacione_id)->with('asignacione')->first();
+        $preguntas = App\Evaluacione::find($evaluacione_id)->preguntas()->paginate(5);
+        return view('docente.reporte_evaluacion')
+            ->with('competencias',$competencias);
+    });
+
+    
     Route::post('/docente/crear_evaluacion/', 'DocenteController@crear_evaluacion');
     Route::post('/docente/definicion/', 'DocenteController@crear_pregunta');
     Route::post('/docente/crear_estandar/', 'DocenteController@crear_estandar');
