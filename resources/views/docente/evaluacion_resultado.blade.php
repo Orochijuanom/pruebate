@@ -1,7 +1,8 @@
 @extends('layouts.docente')
 @section('content')
 <ol class="breadcrumb">
-    <li><a href="/estudiante/">Inicio</a></li>
+    <li><a href="/docente/">Inicio</a></li>
+    <li><a href="/docente/index_evaluacion">Asignaciones</a></li>
     <li class="active">Evaluación</li>
 </ol>
 
@@ -167,15 +168,7 @@
                     <div class="form-group">
                     
                     <input type="hidden" name="pagina" value="{{$preguntas->currentPage()}}" />
-                    @if($limite != 1 )
-                        @if($intentos < $evaluacione->intentos)
-                            <a href="/estudiante/evaluacion/{{$evaluacione->id}}/nuevo" class="btn btn-default"><i class="fa fa-btn fa-plus"></i>Realizar nuevo intento</a>
-                        @endif
-                    
-                    @else
-                    
-                    
-                    @endif                                             
+                                                                 
                     </div>
                     </form>
                 @endif
