@@ -27,6 +27,7 @@
                                     <td>{{$evaluacion->created_at}}</td>
                                     <td>
                                         <a href="/docente/evaluacion/definicion/{{$grado->id}}"><i class="fa fa-cogs" aria-hidden="true"></i></a>
+                                        <a href="/docente/index_evaluacion/{{$evaluacion->id}}/{{$grado->grado->id}}/resultados"><i class="fa fa-users" aria-hidden="true"></i></a>
                                         <a href="/docente/evaluacion/{{$grado->id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     </td>
                                     
