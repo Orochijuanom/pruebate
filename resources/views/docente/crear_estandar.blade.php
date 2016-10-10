@@ -28,7 +28,7 @@
                         <div class="col-md-6">
                             <select id="asignacione" class="form-control" name="asignacione_id">
                                 @foreach ($asignaciones as $asignacione)
-                                    <option value="{{$asignacione->id}}">{{$asignacione->materia->descripcion}}</option>
+                                    <option value="{{$asignacione->id}}">{{$asignacione->grado->descripcion}} - {{$asignacione->materia->descripcion}}</option>
                                 @endforeach
                             </select>                                                        
                         </div>

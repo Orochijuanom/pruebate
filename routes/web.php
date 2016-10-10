@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
     });
 
     Route::get('/docente/evaluacion/{id}', function($id){
-        $grado = App\Asignacione::find($id)->first();
+        $grado = App\Asignacione::find($id);
         $evaluaciones = App\Evaluacione::where('asignacione_id','=',$id)->get();
         return view('docente.evaluacion')                    
                     ->with('grado',$grado)
@@ -101,7 +101,42 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
         }
     });
 
+<<<<<<< HEAD
     //TODO: por terminar
+=======
+
+    Route::get('/docente/index_evaluacion/{evaluacione}/{grado}/resultados', function($evaluacione_id, $grado_id) {
+        $evaluacione = App\Evaluacione::where('id', '=', $evaluacione_id)->with('preguntas')->first();
+        $grado = App\Grado::find($grado_id);
+        $users = App\Grado::find($grado_id)->users()->with('presentaciones')->get();
+
+        $total_preguntas = count($evaluacione->preguntas);
+        $datos = array();
+        foreach($users as $user){
+            $presentacione = $user->presentaciones->where('estado', '=', '1')->last();
+            $aciertos = 0;
+            if($presentacione != null && $presentacione->estado == 1){
+                foreach($presentacione->preguntas as $pregunta){
+                    foreach($evaluacione->preguntas as $respuesta){
+                        if($respuesta->id == $pregunta->pregunta_id && $respuesta->respuesta == $pregunta->pivot->respuesta){
+                           $aciertos++;
+                           }
+                        }
+                    }
+                    $datos[$user->id] = array('nombre' => $user->name, 'aciertos' => $aciertos, 'total' => $total_preguntas);
+                    
+                    }else{
+                        $datos[$user->id] = array('nombre' => $user->name, 'aciertos' => $aciertos, 'total' => $total_preguntas);
+                        
+                        }
+            
+
+        }
+        return view('docente.resultados_grupo')->withGrado($grado)->withEvaluacione($evaluacione)->withDatos($datos);
+        
+    });
+
+>>>>>>> origin/master
     Route::get('/docente/evaluacion/reporte/{evaluacione_id}', function($evaluacione_id){
         $competencias = App\Pregunta::where('evaluacione_id','=',$evaluacione_id)->select('competencia_id')->groupBy('competencia_id')->get();
         //dd($competencias);
@@ -136,6 +171,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
     });
 
     
+
     Route::post('/docente/crear_evaluacion/', 'DocenteController@crear_evaluacion');
     Route::post('/docente/definicion/', 'DocenteController@crear_pregunta');
     Route::post('/docente/crear_estandar/', 'DocenteController@crear_estandar');
