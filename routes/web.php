@@ -104,6 +104,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
 
     Route::get('/docente/index_evaluacion/{evaluacione}/{grado}/resultados', function($evaluacione_id, $grado_id) {
         $evaluacione = App\Evaluacione::where('id', '=', $evaluacione_id)->with('preguntas')->first();
+        $grado = App\Grado::find($grado_id);
         $users = App\Grado::find($grado_id)->users()->with('presentaciones')->get();
 
         $total_preguntas = count($evaluacione->preguntas);
@@ -128,7 +129,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
             
 
         }
-        return view('docente.resultados_grupo')->wihtDatos($datos);
+        return view('docente.resultados_grupo')->withGrado($grado)->withEvaluacione($evaluacione)->withDatos($datos);
         
     });
 

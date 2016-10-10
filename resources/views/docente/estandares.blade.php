@@ -23,7 +23,7 @@
                                 <tr>
                                     <td scope="row">1</td>
                                     <td>{{$estandar->descripcion}}</td>
-                                    <td>{{$estandar->asignacione->materia->descripcion}}</td>                                    
+                                    <td>{{$estandar->asignacione->grado->descripcion}} - {{$estandar->asignacione->materia->descripcion}}</td>                                    
                                     <td>{{$estandar->created_at}}</td>
                                     <td>
                                         <a href="/docente/estandares/definicion/{{$estandar->id}}"><i class="fa fa-cogs" aria-hidden="true"></i></a>
