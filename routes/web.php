@@ -101,13 +101,38 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
         }
     });
 
+    //TODO: por terminar
     Route::get('/docente/evaluacion/reporte/{evaluacione_id}', function($evaluacione_id){
         $competencias = App\Pregunta::where('evaluacione_id','=',$evaluacione_id)->select('competencia_id')->groupBy('competencia_id')->get();
-        dd($competencias);
-        $evaluacione  = App\Evaluacione::find($evaluacione_id)->with('asignacione')->first();
-        $preguntas = App\Evaluacione::find($evaluacione_id)->preguntas()->paginate(5);
+        //dd($competencias);
+        $datos = array();
+        foreach($competencias as $competencia)
+        {            
+            $co = App\Competencia::where('id','=',$competencia['attributes']['competencia_id'])->first();            
+            $preguntas = App\Pregunta::where('evaluacione_id','=',$evaluacione_id)
+                        ->where('competencia_id','=',$co['attributes']['id'])->get();
+            foreach($preguntas as $pregunta)
+            {
+                $respuestas = App\PreguntaPresentacione::where('pregunta_id','=',$pregunta['attributes']['id'])->get();
+                $correctas = 0;
+                $errores = 0;
+                foreach($respuestas as $respuesta){
+                    if($respuesta['attributes']['respuesta'] == $pregunta['attributes']['respuesta'])
+                        $correctas++;
+                    else
+                        $errores++;    
+                }
+                $preg[] = array('pregunta' => $pregunta['attributes']['descripcion'], 'respestas' => array('correctas' => $correctas, 'errores' => $errores));
+            }
+                                    
+           $datos[] = array('competencia' => $co['attributes']['descripcion'],'preguntas' => $preg); 
+            
+        }
+        
+        //$evaluacione  = App\Evaluacione::find($evaluacione_id)->with('asignacione')->first();
+        //$preguntas = App\Evaluacione::find($evaluacione_id)->preguntas()->paginate(5);
         return view('docente.reporte_evaluacion')
-            ->with('competencias',$competencias);
+            ->with('datos',$datos);
     });
 
     
