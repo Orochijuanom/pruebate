@@ -22,7 +22,7 @@
                             @foreach($estandares as $estandar)
                                 <tr>
                                     <td scope="row">1</td>
-                                    <td>{{$estandar->descripcion}}</td>
+                                    <td><a href="/docente/estandares/{{$estandar->id}}">{{$estandar->descripcion}}</a></td>
                                     <td>{{$estandar->asignacione->grado->descripcion}} - {{$estandar->asignacione->materia->descripcion}}</td>                                    
                                     <td>{{$estandar->created_at}}</td>
                                     <td>

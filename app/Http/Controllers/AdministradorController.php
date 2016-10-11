@@ -111,6 +111,31 @@ class AdministradorController extends Controller
         return Redirect::back() -> with('message', 'el docente'.$asignacione->user->name.' ha sido asignado a la materia '.$asignacione->materia->descripcion.' en el grado '.$asignacione->grado->descripcion);
     }
 
+    public function updateAsignacione($id, Request $request){
+         $this->validate($request,[
+
+            'grado_id' => 'required',
+            'materia_id' => 'required',
+            'user_id' => 'required'
+            
+            ]);
+
+            try {
+            $asignacione = Asignacione::find($id);
+            $asignacione->user_id = $request->user_id;
+            $asignacione->grado_id = $request->grado_id;
+            $asignacione->materia_id = $request->materia_id;
+            $asignacione->save();
+
+        }catch (\PDOException $exception) {
+            return Redirect::back() -> withErrors(['message' => 'Ha ocurrido un error en la consulta '.$exception->getMessage()]);
+
+        }
+
+        return Redirect::back() -> with('message', 'La asignación ha sido editado');
+
+    }
+
     public function storeEstudiante($id, Request $request){
         $id = $id;
         

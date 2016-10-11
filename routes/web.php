@@ -88,6 +88,11 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
                 ->with('asignaciones',$asignaciones);
     });
 
+    Route::get('/docente/estandares/{id}', function($id) {
+        $estandar = App\Estandare::find($id);
+        return view('docente.estandares_edit')->withEstandar($estandar);
+    });
+
     Route::get('/docente/estandares/definicion/{id}', function($id){
         $estandar = App\Estandare::find($id);
         return view('docente.competencias')
@@ -257,6 +262,17 @@ Route::group(['middleware' => 'auth', 'middleware' => 'administrador'], function
     });
 
     Route::post('administrador/asignaciones','AdministradorController@storeAsignacione');
+
+    Route::get('administrador/asignaciones/{id}', function($id) {
+        $asignacione = App\Asignacione::find($id);
+        $users = App\User::where('role_id', '=', '2')->get();
+        $materias = App\Materia::all();
+        $grados = App\Grado::all();
+        return view('administrador.asignaciones_edit')->with(['users' => $users, 'grados' => $grados, 'materias' => $materias, 'asignacione' => $asignacione]);
+    });
+
+    Route::put('administrador/asignaciones/{id}', 'AdministradorController@updateAsignacione');
+
     Route::get('/administrador/usuarios', function(){
         $usuarios = App\User::paginate(10);
         return view('administrador.usuarios')
