@@ -1,8 +1,5 @@
 .image_background{
-    background-image: url('../img/colegioagua.png');
-    background-repeat: no-repeat;
-    width: 100%;
-    margin: 0 auto;
-    display:block;
-    text-align:center;
+    background-image: url('../img/escudo.png');
+    background-repeat: repeat-x repeat-y;
+        
 }
