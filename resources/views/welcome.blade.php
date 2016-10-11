@@ -67,7 +67,7 @@
     </head>
     <body class="image_background">
         <div class="flex-center position-ref full-height">
-            <div class="content">
+            <div class="content">                
                 <div class="title m-b-md">
                     <img src="{{asset('img/logo.png')}}" alt="logo" />
                 </div>
