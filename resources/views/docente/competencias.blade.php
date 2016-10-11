@@ -42,17 +42,15 @@
                             <th>N.</th>
                             <th>Descripción</th>
                             <th>F. Creación</th>                            
-                            <th>Opciones</th>
+                            
                         </thead>  
                         <tbody>
                             @foreach($estandar->competencias as $competencia)
                                 <tr>
                                     <td scope="row">1</td>
-                                    <td>{{$competencia->descripcion}}</td>                                    
+                                    <td><a href="/docente/estandares/competencias/{{$competencia->id}}">{{$competencia->descripcion}}</a></td>                                    
                                     <td>{{$competencia->created_at}}</td>
-                                    <td>                                        
-                                        <a href="/docente/estandares/{{$competencia->id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    </td>
+                                    
                                     
                                 </tr>    
                             @endforeach

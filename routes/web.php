@@ -95,15 +95,24 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
     });
 
     Route::get('/docente/estandares/{id}', function($id) {
-        $estandar = App\Estandare::find($id);
-        return view('docente.estandares_edit')->withEstandar($estandar);
+        $estandare = App\Estandare::find($id);
+        return view('docente.estandares_edit')->withEstandare($estandare);
     });
 
+    Route::put('/docente/estandares/{id}', 'DocenteController@updateEstandar');
+
     Route::get('/docente/estandares/definicion/{id}', function($id){
-        $estandar = App\Estandare::find($id);
+        $estandare = App\Estandare::find($id);
         return view('docente.competencias')
-            ->with('estandar', $estandar);
+            ->with('estandar', $estandare);
     });
+
+    Route::get('/docente/estandares/competencias/{id}', function($id) {
+        $compentencia = App\Competencia::find($id);
+        return view('docente.competencias_edit')->withCompetencia($compentencia);
+    });
+
+    Route::put('/docente/estandares/competencias/{id}','DocenteController@updateCompetencias');
 
 
     Route::get('/docente/evaluacion/presentacion_estud/{evaluacione_id}/{user_id}', function($evaluacione_id, $user_id) {

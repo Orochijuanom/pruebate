@@ -10,6 +10,8 @@ use App\Pregunta;
 use App\Estandare;
 use App\Competencia;
 
+use Redirect;
+
 class DocenteController extends Controller
 {
     
@@ -57,6 +59,24 @@ class DocenteController extends Controller
         return redirect()->back()->with('flash_message', 'Se ha creado el exitosamente');
     }
 
+    public function updateEstandar($id, Request $request){
+         $this->validate($request, [
+            'descripcion' => 'required'
+        ]);
+
+        try {
+            $estandare = Estandare::find($id);
+            $estandare->descripcion = $request->descripcion;
+            $estandare->save();
+
+        }catch (\PDOException $exception) {
+            return Redirect::back() -> withErrors(['message' => 'Ha ocurrido un error en la consulta '.$exception->getMessage()]);
+
+        }
+
+        return Redirect::back() -> with('message', 'El estandar ha sido editado');
+    }
+
     public function definir_estandar(Request $request)
     {
         $this->validate($request, [
@@ -66,5 +86,24 @@ class DocenteController extends Controller
         $data = $request->all();
         Competencia::create($data);
         return redirect()->back()->with('flash_message', 'Se ha creado el exitosamente');
+    }
+
+    public function updateCompetencias($id, Request $request){
+        $this->validate($request, [
+            'descripcion' => 'required',
+           
+        ]);
+
+        try {
+            $competencia = Competencia::find($id);
+            $competencia->descripcion = $request->descripcion;
+            $competencia->save();
+
+        }catch (\PDOException $exception) {
+            return Redirect::back() -> withErrors(['message' => 'Ha ocurrido un error en la consulta '.$exception->getMessage()]);
+
+        }
+
+        return Redirect::back() -> with('message', 'La competencia ha sido editada');
     }  
 }
