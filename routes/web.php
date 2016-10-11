@@ -53,7 +53,16 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
     
     Route::get('/docente/evaluacion/definicion/{id}', function($id){
         $preguntas = App\Pregunta::where('evaluacione_id','=',$id)->get();
-        $competencias = App\Competencia::all();
+        $asignaciones = App\Evaluacione::find($id)->asignacione()->with('estandares')->first();
+        $competencias = array();
+        foreach($asignaciones->estandares as $estandare){
+            foreach($estandare->competencias as $competencia){
+                $competencias[] = $competencia; 
+
+            }
+
+        }
+        
         return view('docente.definicion')
                         ->with('id', $id)
                         ->with('preguntas',$preguntas)
@@ -80,7 +89,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
     });
 
     Route::get('/docente/estandares/definicion/{id}', function($id){
-        $estandar = App\Estandare::find($id)->first();
+        $estandar = App\Estandare::find($id);
         return view('docente.competencias')
             ->with('estandar', $estandar);
     });
@@ -116,11 +125,13 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
             if($presentacione != null && $presentacione->estado == 1){
                 foreach($presentacione->preguntas as $pregunta){
                     foreach($evaluacione->preguntas as $respuesta){
-                        if($respuesta->id == $pregunta->pregunta_id && $respuesta->respuesta == $pregunta->pivot->respuesta){
+                        if($respuesta->id == $pregunta->id && $respuesta->respuesta == $pregunta->pivot->respuesta){
                            $aciertos++;
+                           
                            }
                         }
                     }
+                    
                     $datos[$user->id] = array('nombre' => $user->name, 'aciertos' => $aciertos, 'total' => $total_preguntas);
                     
                     }else{

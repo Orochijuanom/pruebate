@@ -30,4 +30,7 @@ class Asignacione extends Model
         return $this->hasMany('App\Evaluacione');
     }
     
+    public function estandares(){
+        return $this->hasMany('App\Estandare');
+    }
 }

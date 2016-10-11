@@ -2,7 +2,7 @@
 @section('content')
     <ol class="breadcrumb">
         <li><a href="/docente/">Inicio</a></li>
-        <li><a href="docente/index_evaluacion">Asignaciones</a></li>        
+        <li><a href="/docente/evaluacion/{{$evaluacione->asignacione_id}}">Asignaciones</a></li>        
         <li class="active">{{$grado->descripcion}}</li>
     </ol>
     <div class="panel panel-default">
