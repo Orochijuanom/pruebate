@@ -9,10 +9,11 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link href="/css/img.css" rel="stylesheet">
         <!-- Styles -->
         <style>
             html, body {
+                
                 background-color: #fff;
                 color: #7e2131;
                 font-family: 'Raleway', sans-serif;
@@ -64,7 +65,7 @@
             }
         </style>
     </head>
-    <body>
+    <body class="image_background">
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">

@@ -42,11 +42,17 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
     });
 
     Route::get('/docente/evaluacion/presentacion_estud/{id}', function($id){
+        //$competencias = App\Pregunta::where('evaluacione_id','=',$evaluacione_id)->select('competencia_id')->groupBy('competencia_id')->get();
+        $evaluacion = App\Evaluacione::find($id);
         $estudiantes = App\Presentacione::where('evaluacione_id','=',$id)
-                                        ->where('estado','=','1')->get();
+                                        ->where('estado','=','1')
+                                        ->select('evaluacione_id','user_id')
+                                        ->groupBy('user_id')
+                                        ->groupBy('evaluacione_id')->get();
         
         return view('docente.estudiantes')
-            ->with('estudiantes', $estudiantes);
+            ->with('estudiantes', $estudiantes)
+            ->with('evaluacion',$evaluacion);
     });
 
    
