@@ -27,7 +27,7 @@
                                     <td>{{$estandar->created_at}}</td>
                                     <td>
                                         <a href="/docente/estandares/definicion/{{$estandar->id}}"><i class="fa fa-cogs" aria-hidden="true"></i></a>
-                                        <a href="/docente/estandares/{{$estandar->id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        
                                     </td>
                                     
                                 </tr>    

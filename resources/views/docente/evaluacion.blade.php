@@ -29,7 +29,7 @@
 
                                         <a href="/docente/evaluacion/definicion/{{$evaluacion->id}}"><i class="fa fa-cogs" aria-hidden="true"></i></a>
                                         <a href="/docente/evaluacion/presentacion_estud/{{$evaluacion->id}}"><i class="fa fa-users" aria-hidden="true"></i></a>
-                                        <a href="/docente/index_evaluacion/{{$evaluacion->id}}/{{$grado->grado->id}}/resultados"><i class="fa fa-users" aria-hidden="true"></i></a>
+                                        <a href="/docente/index_evaluacion/{{$evaluacion->id}}/{{$grado->grado->id}}/resultados"><i class="fa fa-bar-chart" aria-hidden="true"></i></a>
                                         <a href="/docente/evaluacion/reporte/{{$evaluacion->id}}"><i class="fa fa-wpforms" aria-hidden="true"></i></a>
                                         <!--<a href="/docente/evaluacion/{{$evaluacion->id}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>-->
 

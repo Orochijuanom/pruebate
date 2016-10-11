@@ -1,6 +1,12 @@
 @extends('layouts.docente')
 
 @section('content')
+<ol class="breadcrumb">
+    <li><a href="/administrador/">Inicio</a></li>
+    <li><a href="/administrador/docentes">Docentes</a></li>
+    <li class="active">Editar</li>
+</ol>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

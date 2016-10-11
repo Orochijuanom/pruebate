@@ -2,7 +2,8 @@
 @section('content')
     <ol class="breadcrumb">
       <li><a href="/docente/">Inicio</a></li>
-      <li class="active">Estándares</li>      
+      <li><a href="/docente/estandares">Estándares</a></li>
+      <li class="active">Competencias</li>      
     </ol>
 
     <div class="panel panel-default">
