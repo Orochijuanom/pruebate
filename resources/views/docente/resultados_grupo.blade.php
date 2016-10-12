@@ -14,7 +14,8 @@
                     <thead>
                         <th>N.</th>
                         <th>Estudiante</th>
-                        <th>resultado</th>
+                        <th>Resultado</th>
+                        <th>Porcentaje</th>
                     </thead>  
                     <tbody>
                         @foreach($datos as $dato)
@@ -22,7 +23,8 @@
                             <tr>
                                 <td scope="row">1</td>
                                 <td>{{$dato['nombre']}}</td>
-                                <td>{{$dato['aciertos']}}/{{$dato['total']}}</td>                                
+                                <td>{{$dato['aciertos']}}/{{$dato['total']}}</td>  
+                                <td>{{$dato['porcentaje']}}%</td>                              
                                 
                                                         
                             </tr>    

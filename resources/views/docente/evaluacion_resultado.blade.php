@@ -18,9 +18,8 @@
                 @endif
 
                 <div class="alert alert-success" role="alert">
-                    <ul>
-                        <li><a href="{{$evaluacione->apoyo}}" target="_blank">Material de apoyo disponible</a>
-                    </ul>
+                    <button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#myModal">Material de apoyo disponible</button>
+                    
                 </div>
                 @if (count($errors) > 0)
                         <div class="alert alert-danger">
@@ -174,6 +173,29 @@
                 @endif
             </div>            
         </div>
+
+        <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Material de apoyo disponible</h4>
+        </div>
+        <div class="modal-body">
+          <iframe width="560" height="315" src="{{$evaluacione->apoyo}}" frameborder="0" allowfullscreen></iframe>
+          <ul>
+            <li><a href="{{$evaluacione->apoyo}}" target="_blank">Material de apoyo disponible</a>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
         
     </div>        
 @endsection

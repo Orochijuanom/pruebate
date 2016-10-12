@@ -31,6 +31,8 @@
 
                      <div class="alert alert-success" role="alert">
                         Los grados creados
+                        <a href="/planillagrado.xlsx"><span class="pull-right clickable"><i class="fa fa-cloud-download"></i></span></a>
+
                         <a href="/reportes/grados"><span class="pull-right clickable"><i class="fa fa-download"></i></span></a>
                     </div>
 

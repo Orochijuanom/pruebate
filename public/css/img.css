@@ -1,5 +1,5 @@
 .image_background{
     background-image: url('../img/escudo.png');
-    background-repeat: repeat-x repeat-y;
+    background-repeat: no-repeat;
         
 }

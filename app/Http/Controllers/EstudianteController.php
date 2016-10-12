@@ -14,7 +14,7 @@ class EstudianteController extends Controller
 {
     public function storeRespuesta($evaluacione_id, Request $request){
 
-        $evaluacione = Evaluacione::find($evaluacione_id)->first();
+        $evaluacione = Evaluacione::find($evaluacione_id);
         
         if($evaluacione->limite < date('Y-m-d h:i:s')){
             return redirect('estudiante/evaluacion/'.$evaluacione->id)->withErrors(['message' => 'Se ha pasado de la fecha limite '.$evaluacione->limite.' para presentar su prueba']);

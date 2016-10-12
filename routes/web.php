@@ -119,7 +119,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
         $limite = 0;
         $intentos = 0;
         $presentacione = null;
-        $evaluacione  = App\Evaluacione::find($evaluacione_id)->with('asignacione')->first();
+        $evaluacione  = App\Evaluacione::where('id', '=', $evaluacione_id)->with('asignacione')->first();
         $preguntas = App\Evaluacione::find($evaluacione_id)->preguntas()->paginate(5);
                                 
         $intentos = App\Presentacione::where('evaluacione_id', '=', $evaluacione->id)->where('user_id', '=', $user_id)->where('estado', '=', '1')->count();
@@ -136,11 +136,11 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
         $evaluacione = App\Evaluacione::where('id', '=', $evaluacione_id)->with('preguntas')->first();
         $grado = App\Grado::find($grado_id);
         $users = App\Grado::find($grado_id)->users()->with('presentaciones')->get();
-
+        
         $total_preguntas = count($evaluacione->preguntas);
         $datos = array();
         foreach($users as $user){
-            $presentacione = $user->presentaciones->where('estado', '=', '1')->last();
+            $presentacione = $user->presentaciones->where('estado', '=', '1')->where('evaluacione_id', '=', $evaluacione_id)->last();
             $aciertos = 0;
             if($presentacione != null && $presentacione->estado == 1){
                 foreach($presentacione->preguntas as $pregunta){
@@ -151,11 +151,12 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
                            }
                         }
                     }
-                    
-                    $datos[$user->id] = array('nombre' => $user->name, 'aciertos' => $aciertos, 'total' => $total_preguntas);
+                    $porcentaje = $aciertos * 100 / $total_preguntas;
+                    $datos[$user->id] = array('nombre' => $user->name, 'aciertos' => $aciertos, 'total' => $total_preguntas, 'porcentaje' => round($porcentaje,2));
                     
                     }else{
-                        $datos[$user->id] = array('nombre' => $user->name, 'aciertos' => $aciertos, 'total' => $total_preguntas);
+                        $porcentaje = $aciertos * 100 / $total_preguntas;
+                        $datos[$user->id] = array('nombre' => $user->name, 'aciertos' => $aciertos, 'total' => $total_preguntas, 'porcentaje' => round($porcentaje,2));
                         
                         }
             
@@ -319,7 +320,7 @@ Route::group(['middleware' => 'auth','middleware' => 'estudiante'], function () 
         $limite = 0;
         $intentos = 0;
         $presentacione = null;
-        $evaluacione  = App\Evaluacione::find($id)->with('asignacione')->first();
+        $evaluacione  = App\Evaluacione::where('id', '=', $id)->with('asignacione')->first();
         $preguntas = App\Evaluacione::find($id)->preguntas()->paginate(5);
         
         if(!$new){
