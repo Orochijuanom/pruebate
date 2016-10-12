@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/acercade',function(){
+    return view('acercade');
+});
+
+Route::get('politicas', function(){
+    return view('politicas');
+});
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index');
@@ -199,7 +207,12 @@ Route::group(['middleware' => 'auth', 'middleware' => 'docente'], function () {
             ->with('datos',$datos);
     });
 
-    
+    Route::get('docente/evaluacion/edit/{id}', function($id) {
+        $evaluacione = App\Evaluacione::find($id);
+        return view('docente.editar_evaluacion')->withEvaluacione($evaluacione);
+    });
+
+    Route::put('docente/evaluacion/edit/{id}', 'DocenteController@updateEvaluacion');
 
     Route::post('/docente/crear_evaluacion/', 'DocenteController@crear_evaluacion');
     Route::post('/docente/definicion/', 'DocenteController@crear_pregunta');

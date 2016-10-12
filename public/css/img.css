@@ -1,5 +1,11 @@
 .image_background{
-    background-image: url('../img/escudo.png');
+
+    background-image: url('../img/colegioagua.png');        
     background-repeat: no-repeat;
-        
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;  
+    -webkit-background-size: 800px;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
