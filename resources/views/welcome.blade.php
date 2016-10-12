@@ -8,16 +8,15 @@
         <title>Pruebate</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <!--<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">-->
         <link href="/css/img.css" rel="stylesheet">
         <!-- Styles -->
         <style>
-            html, body {
-                
-                background-color: #fff;
+            html, body {                
+                background-color: #fff;                
                 color: #7e2131;
                 font-family: 'Raleway', sans-serif;
-                font-weight: 100;
+                font-weight: bold;
                 height: 100vh;
                 margin: 0;
             }
@@ -71,11 +70,19 @@
                 <div class="title m-b-md">
                     <img src="{{asset('img/logo.png')}}" alt="logo" />
                 </div>
+                
                 <div class="links">
                     <a href="{{ url('/administrador') }}">Administrador</a>
                     <a href="{{ url('/docente') }}">Docentes</a>
                     <a href="{{ url('/estudiante') }}">Estudiantes</a>                    
                 </div>
+                <br/>
+                <br/>
+                <div class="links">
+                    <a href="{{ url('/acercade') }}">Acerca de</a>
+                    <a href="{{ url('/politicas') }}">Póliticas de uso</a>                                        
+                </div>
+                
             </div>
         </div>
     </body>

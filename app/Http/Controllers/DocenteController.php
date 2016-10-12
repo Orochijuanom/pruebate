@@ -105,5 +105,31 @@ class DocenteController extends Controller
         }
 
         return Redirect::back() -> with('message', 'La competencia ha sido editada');
+    }
+
+
+    public function updateEvaluacion($id, Request $request){
+         $this->validate($request, [
+            'descripcion' => 'required',
+            'intentos' => 'required',
+            'limite' => 'required',
+            'apoyo' => 'required'
+        ]);
+
+        try {
+            
+            $evaluacion = Evaluacione::find($id);
+            $evaluacion->descripcion = $request->descripcion;
+            $evaluacion->intentos = $request->intentos;
+            $evaluacion->apoyo = $request->apoyo;
+            $evaluacion->limite = $request->limite;
+            $evaluacion->save();
+
+        }catch (\PDOException $exception) {
+            return Redirect::back() -> withErrors(['message' => 'Ha ocurrido un error en la consulta '.$exception->getMessage()]);
+
+        }
+
+        return Redirect::back() -> with('message', 'La evaluacion ha sido editado');
     }  
 }

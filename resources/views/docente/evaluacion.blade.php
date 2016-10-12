@@ -22,7 +22,7 @@
                             @foreach($evaluaciones as $evaluacion)
                                 <tr>
                                     <td scope="row">1</td>
-                                    <td>{{$evaluacion->descripcion}}</td>
+                                    <td><a href="/docente/evaluacion/edit/{{$evaluacion->id}}">{{$evaluacion->descripcion}}</a></td>
                                     <td>{{$evaluacion->intentos}}</td>
                                     <td>{{$evaluacion->created_at}}</td>
                                     <td>
